@@ -18,4 +18,6 @@
   <li>Trabalhar em uma empresa de tecnologia</li>
   <li>Passar em um concurso público</li>
 </ul>
- 
+<p>Expectativa quanto a disciplina</p>
+
+<li>Espero que a disciplina seja desafiadora, interessante e que eu possa melhorar ainda mais minhas habilidades.</li>
