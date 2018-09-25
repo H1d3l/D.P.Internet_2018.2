@@ -9,7 +9,6 @@
 <ul>
   <li>Manutenção em computadores</li>
   <li>Desenvolvimento em linguagem Python</li>
-  <li>Aprendendo linguagem c#</li>
   <li>Conhecimento da linguagem JAVA,HTML,CSS</li>
 </ul>
 <p>Interesses Acadêmicos/Profissionais</p>
