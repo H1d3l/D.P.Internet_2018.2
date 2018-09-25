@@ -9,11 +9,11 @@
 <ul>
   <li>Manutenção em computadores</li>
   <li>Desenvolvimento em linguagem Python</li>
-  <li>Conhecimento da linguagem JAVA,HTML,CSS</li>
+  <li>Conhecimento da linguagem JAVA,Android,HTML,CSS</li>
+  <li>Conhecimento do framework Materialize,Bootstrap</li>
 </ul>
 <p>Interesses Acadêmicos/Profissionais</p>
 <ul>
-  <li>Trabalhar em uma empresa de tecnologia</li>
   <li>Passar em um concurso público</li>
 </ul>
 <p>Expectativa quanto a disciplina</p>
