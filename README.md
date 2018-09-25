@@ -13,7 +13,6 @@
 </ul>
 <p>Interesses Acadêmicos/Profissionais</p>
 <ul>
-  <li>Concluir o curso de Análise e Desenvolvimento de Sistemas</li>
   <li>Trabalhar em uma empresa de tecnologia</li>
   <li>Passar em um concurso público</li>
 </ul>
