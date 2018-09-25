@@ -14,6 +14,7 @@
 </ul>
 <p>Interesses Acadêmicos/Profissionais</p>
 <ul>
+  <li>Front-end</li>
   <li>Passar em um concurso público</li>
 </ul>
 <p>Expectativa quanto a disciplina</p>
