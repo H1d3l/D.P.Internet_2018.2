@@ -23,11 +23,17 @@ def getimage(url):
     i.save("flower.jpg")
     return i.show()   
 
-def main():
+def print_menu():
+    print("1-quest01\n2-quest02\n3-quest03\n0-sair"+"\n")
 
-    while True:
-        print("1-quest01\n 2-quest02\n 3-quest03\n 0-sair"+"\n")
+
+
+def main():
+    loop = True
+    while loop:
+        print_menu()
         menu=input("opcao: ")
+        
         if menu == 1:
             op = raw_input("url:")
             print "statuscode:",getstatuscode(op)
@@ -36,6 +42,10 @@ def main():
         elif menu == 2:
             op = raw_input("url:")
             getimage(op)
+        elif menu == 3:
+            print "questao ainda nao resolvida"
+        elif menu == 0:
+            loop = False
 
    
 
