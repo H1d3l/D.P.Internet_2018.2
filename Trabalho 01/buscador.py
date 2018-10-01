@@ -1,33 +1,42 @@
 from bs4 import BeautifulSoup
-import requests
-import re
-
-#response = requests.get('http://www.ifpi.edu.br/')
-#print (response)
+import requests,re
 
 class Buscador:
+    
     def __init__(self,keyword,url,deth):
         self.keyword = keyword
         self.url = url
         self.deth = deth
-    
-    def search(self):
-        words = []
-        links = []
+
+    def conexion(self):
         try:
             response = requests.get(self.url)
         except Exception as erro:
             print('Erro de Conexão'+self.url)
             response = None
         soup = BeautifulSoup(response.text,'html.parser')
-        word = soup.find_all(string = re.compile(self.keyword))
+        return soup
+
+    
+
+
+    def search_word(self):
+        words = []
+        word = self.conexion()
+        temp = word.find_all(string = re.compile(self.keyword))
+        for i in temp:
+            temp1 = i.find(self.keyword)
+            words.append(i[temp1-10:len(self.keyword)+temp1+10])
+        return words
+
+
+    def search_all(self):
+        links = []
         if self.deth == 0:
-            for i in word:
-                temp = i.find(self.keyword)
-                words.append(i[temp-10:len(self.keyword)+temp+10])
-            return words
+            return self.search_word()
         if self.deth>0:
-            link = soup.find_all('a')
+            temp = self.conexion()
+            link = temp.find_all('a')
             for i in link:
                 temp = i.get('href')
                 if temp!=None:
@@ -38,4 +47,4 @@ class Buscador:
 
 
 p = Buscador('Palmeiras','https://www.uol.com.br/',1)
-print(p.search())
+print(p.search_word())
