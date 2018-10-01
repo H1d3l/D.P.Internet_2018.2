@@ -3,48 +3,33 @@ import requests,re
 
 class Buscador:
     
-    def __init__(self,keyword,url,deth):
+    def __init__(self,keyword):
         self.keyword = keyword
-        self.url = url
-        self.deth = deth
 
-    def conexion(self):
+    def search_word(self,url):
+        words = []
         try:
-            response = requests.get(self.url)
+            response = requests.get(url)
         except Exception as erro:
-            print('Erro de Conexão'+self.url)
+            print('Erro de Conexão')
             response = None
         soup = BeautifulSoup(response.text,'html.parser')
-        return soup
-
-    
-
-
-    def search_word(self):
-        words = []
-        word = self.conexion()
-        temp = word.find_all(string = re.compile(self.keyword))
+        temp = soup.find_all(string = re.compile(self.keyword))
         for i in temp:
             temp1 = i.find(self.keyword)
             words.append(i[temp1-10:len(self.keyword)+temp1+10])
         return words
 
 
-    def search_all(self):
+    def search_all(self,url,deth):
         links = []
-        if self.deth == 0:
-            return self.search_word()
-        if self.deth>0:
-            temp = self.conexion()
-            link = temp.find_all('a')
-            for i in link:
-                temp = i.get('href')
-                if temp!=None:
-                    links.append(temp)
-            return links
+        if deth == 0:
+            return self.search_word(url)
+        
+        #if deth>0:
+
 
                 
 
-
-p = Buscador('Palmeiras','https://www.uol.com.br/',1)
-print(p.search_word())
+p = Buscador('Hildebrando')
+print(p.search_all('https://pt.wikipedia.org/wiki/Hildebrando_Pascoal',0))
