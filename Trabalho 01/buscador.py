@@ -35,6 +35,5 @@ class Buscador:
 
 
                 
-
 p = Buscador('Hildebrando','https://pt.wikipedia.org/wiki/Hildebrando_Pascoal',0)
 print(p.search_word())
