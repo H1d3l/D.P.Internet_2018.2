@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de postagens</title>
+</head>
+<body>
+    <h1>My Blog</h1>
+        {% for post in posts %}
+            <h2>{{post.title}}</h2>
+            <p>{{post.text|linebreaksbr}}</p>
+        {% endfor %}
+    <a href="{% url 'add_post' %}">Add post</a>
+
+
+</body>
+</html>
