@@ -65,12 +65,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="34" column="66" lean-forward="true" selection-start-line="34" selection-start-column="66" selection-end-line="34" selection-end-column="66" />
+            <state relative-caret-position="255">
+              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
-                <marker date="1544364981550" expanded="true" signature="682:1096" ph="..." />
-                <marker date="1544364981550" expanded="true" signature="1125:1430" ph="..." />
+                <marker date="1544365649812" expanded="true" signature="682:1028" ph="..." />
+                <marker date="1544365649812" expanded="true" signature="1057:1351" ph="..." />
               </folding>
             </state>
           </provider>
@@ -268,12 +268,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="34" column="66" lean-forward="true" selection-start-line="34" selection-start-column="66" selection-end-line="34" selection-end-column="66" />
+        <state relative-caret-position="255">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-            <marker date="1544364981550" expanded="true" signature="682:1096" ph="..." />
-            <marker date="1544364981550" expanded="true" signature="1125:1430" ph="..." />
+            <marker date="1544365649812" expanded="true" signature="682:1028" ph="..." />
+            <marker date="1544365649812" expanded="true" signature="1057:1351" ph="..." />
           </folding>
         </state>
       </provider>
