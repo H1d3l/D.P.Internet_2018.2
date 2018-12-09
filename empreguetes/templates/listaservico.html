@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    {% block content %}
+        <h1>Serviços Cadastrados</h1>
+        {% for servico in servicos %}
+            <h2>{{servico.nome}}</h2>
+            <p>Valor: {{servico.valor|linebreaksbr}}</p>
+        {% endfor %}
+        <a href="{% url 'cadastroServico' %}">Adicionar Serviço</a>
+     {% endblock %}
+
+
+</body>
+</html>
