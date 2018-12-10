@@ -1,4 +1,6 @@
 from django.forms import fields
+
+
 class PercentageField(fields.FloatField):
     widget = fields.TextInput(attrs={"class": "percentInput"})
 
@@ -22,3 +24,5 @@ class PercentageField(fields.FloatField):
         val = super(PercentageField,self).prepare_value(value)
         if self.is_number(val) and not isinstance(val, str):
             return str((float(val)*100))
+
+

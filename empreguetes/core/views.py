@@ -4,7 +4,7 @@ from core.forms import *
 # Create your views here.
 
 def listaServico(request):
-    return render(request, 'listaservico.html', {'servicos': Servico.objects.all()})
+    return render(request, 'listaservico.html', {'servicos': Servico.objects.all(),'combos':ComboServico.objects.all()})
 
 
 def cadastroServico(request):
@@ -18,4 +18,13 @@ def cadastroServico(request):
         return render(request, 'add_servico.html', {'form':form})
 
 
+def cadastroComboServico(request):
+    if request.method == 'POST':
+        form = CadastroComboServicoForm(request.POST)
+        if form.is_valid():
+            model_instance = form.save()
+            return redirect('listaServico')
+    else:
+        form = CadastroComboServicoForm()
+        return render(request, 'add_servico.html', {'form': form})
 

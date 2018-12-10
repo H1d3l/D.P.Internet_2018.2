@@ -20,6 +20,7 @@ from core import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.listaServico, name='listaServico'),
-    path('cadastroServico/',views.cadastroServico,name = 'cadastroServico')
+    path('cadastroServico/',views.cadastroServico,name = 'cadastroServico'),
+    path('cadastroCombo/', views.cadastroComboServico, name='cadastroCombo')
 
 ]
