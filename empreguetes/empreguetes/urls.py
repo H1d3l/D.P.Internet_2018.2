@@ -32,5 +32,6 @@ urlpatterns = [
     path('cadastroDiarista/', views.cadastroDiarista, name='cadastroDiarista'),
     path('listaDiarista/', views.listDiarista, name='listaDiarista'),
     path('criarContrato/', views.criarContrato, name='criarContrato'),
+    path('listaContrato/', views.listContrato, name='listaContrato'),
 
 ]

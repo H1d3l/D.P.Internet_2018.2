@@ -52,8 +52,14 @@ class Diarista(models.Model):
 class Contrato(models.Model):
     cliente = models.ForeignKey(Cliente,on_delete=models.CASCADE)
     funcionario = models.ForeignKey(Funcionario,on_delete=models.CASCADE)
-    servico = models.ManyToManyField(Servico)
+    servico = models.ManyToManyField(Servico, related_name="servicos")
     diarista = models.ForeignKey(Diarista,on_delete=models.CASCADE)
+
+    def getSevicos(self):
+        return self.servico.all()
+
+    def __str__(self):
+        return self.cliente.nome
 
 
 

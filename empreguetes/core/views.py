@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from core.models import *
 from core.forms import *
 # Create your views here.
@@ -19,6 +19,9 @@ def listFuncionario(request):
 
 def listDiarista(request):
     return render(request, 'listaDiarista.html',{'diaristas':Diarista.objects.all()})
+
+def listContrato(request):
+    return render(request, 'listaContrato.html', {'contratos': Contrato.objects.all()})
 
 def cadastroServico(request):
     if request.method == 'POST':
@@ -99,3 +102,19 @@ def criarContrato(request):
     else:
         form = CriarContratoForm()
         return render(request, 'criar_contrato.html', {'form':form})
+'''
+def edit_post(request,pk):
+    editpost = get_object_or_404(Post,pk=pk)
+    if request.method == "POST":
+        form = PostForm(request.POST,instance=editpost)
+        if form.is_valid():
+            model_instance = form.save(commit=False)
+            model_instance.author = request.user
+            model_instance.data_published = timezone.now()
+            model_instance.save()
+            return redirect('list_post')
+    else:
+        form = PostForm(instance=editpost)
+        return render(request, 'add_post.html', {'form': form})
+'''
+
