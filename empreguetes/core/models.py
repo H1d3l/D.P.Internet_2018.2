@@ -4,18 +4,28 @@ from core.utils import testField
 
 class CategoriaCliente(models.Model):
     nome = models.CharField(max_length=60,null=False)
-    desconto = testField.PercentageField()
+    desconto = models.FloatField(default=0)
+
+    def __str__(self):
+        return self.nome
 
 class Cliente(models.Model):
     nome = models.CharField(max_length=60,null=False)
     telefone = models.CharField(max_length=20,null=False)
     categoria = models.OneToOneField(CategoriaCliente,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.nome
+
 
 class Funcionario(models.Model):
     nome = models.CharField(max_length=60,null=False)
     endereco = models.CharField(max_length=100,null=False)
     telefone = models.CharField(max_length=20,null=False)
+
+    def __str__(self):
+        return self.nome
+
 
 class Servico(models.Model):
     nome = models.CharField(max_length=60,null=False)
@@ -30,23 +40,20 @@ class ComboServico(models.Model):
     valor = models.FloatField(default=0)
 
 
-
-
-
-
 class Diarista(models.Model):
     nome = models.CharField(max_length=60,null=False)
     endereco = models.CharField(max_length=100,null=False)
     telefone = models.CharField(max_length=20,null=False)
     servico = models.ManyToManyField(Servico)
 
+    def __str__(self):
+        return self.nome
+
 class Contrato(models.Model):
-    cliente = models.ForeignKey(Cliente,on_delete=models.CASCADE,null=False)
-    funcionario = models.ForeignKey(Funcionario,on_delete=models.CASCADE,null=False)
+    cliente = models.ForeignKey(Cliente,on_delete=models.CASCADE)
+    funcionario = models.ForeignKey(Funcionario,on_delete=models.CASCADE)
     servico = models.ManyToManyField(Servico)
-    diarista = models.ForeignKey(Diarista,on_delete=models.CASCADE,null=False)
-
-
+    diarista = models.ForeignKey(Diarista,on_delete=models.CASCADE)
 
 
 

@@ -19,8 +19,18 @@ from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.listaServico, name='listaServico'),
+    path('', views.index, name='index'),
+    path('servico/', views.listaServico, name='listaServico'),
     path('cadastroServico/',views.cadastroServico,name = 'cadastroServico'),
-    path('cadastroCombo/', views.cadastroComboServico, name='cadastroCombo')
+    path('cadastroCombo/', views.cadastroComboServico, name='cadastroCombo'),
+    path('cadastroCategoria/', views.cadastroCategoriaCliente, name='cadastroCategoriaCliente'),
+    path('listarCategoria/', views.listCategoriaCliente, name='listaCategoriaCliente'),
+    path('cadastroCliente/', views.cadastroCliente, name='cadastroCliente'),
+    path('listaCliente/', views.listClientes, name='listaClientes'),
+    path('cadastroFuncionario/', views.cadastroFuncionario, name='cadastroFuncionario'),
+    path('listarFuncionario/', views.listFuncionario, name='listaFuncionario'),
+    path('cadastroDiarista/', views.cadastroDiarista, name='cadastroDiarista'),
+    path('listaDiarista/', views.listDiarista, name='listaDiarista'),
+    path('criarContrato/', views.criarContrato, name='criarContrato'),
 
 ]

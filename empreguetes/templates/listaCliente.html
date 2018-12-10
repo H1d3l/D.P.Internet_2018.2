@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% block content %}
+        {% for cliente in clientes %}
+            <h2>{{ cliente.nome }}</h2>
+            <h2>{{ cliente.categoria }}</h2>
+        {% endfor %}
+    {% endblock %}
+
+</body>
+</html>

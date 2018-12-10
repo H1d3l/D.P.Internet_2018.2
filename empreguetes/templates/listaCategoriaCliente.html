@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% block content %}
+        {% for categorias in categoria %}
+            <h2>{{ categorias.nome }}</h2>
+            <h2>{{ categorias.desconto }}</h2>
+        {% endfor %}
+    {% endblock %}
+
+</body>
+</html>
