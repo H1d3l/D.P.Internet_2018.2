@@ -14,7 +14,17 @@
             <h2>{{servico.nome}}</h2>
             <p>Valor: {{servico.valor|linebreaksbr}}</p>
         {% endfor %}
+        {% for combo in combos %}
+            <h2>{{combo.nome}}</h2>
+            {% for servico in combo.servico.all %}
+                <h4>{{servico}}</h4>
+            {% endfor %}
+            <p>Valor: {{combo.valor|linebreaksbr}}</p>
+        {% endfor %}
         <a href="{% url 'cadastroServico' %}">Adicionar Serviço</a>
+        <a href="{% url 'cadastroCombo' %}">Adicionar Combo</a>
+
+
      {% endblock %}
 
 
