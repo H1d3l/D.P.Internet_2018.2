@@ -8,4 +8,4 @@ class CadastroServicoForm(ModelForm):
 class CadastroComboServicoForm(ModelForm):
     class Meta:
         model = ComboServico
-        fields = ['nome','servico','valor']
+        fields = '__all__'
