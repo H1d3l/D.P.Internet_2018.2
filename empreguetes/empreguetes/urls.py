@@ -21,6 +21,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('servico/', views.listaServico, name='listaServico'),
+    path('editarservico/<int:pk>', views.editarServico, name='editarServico'),
+    path('excluiservico/<int:pk>', views.excluirServico, name='excluiServico'),
+
     path('cadastroServico/',views.cadastroServico,name = 'cadastroServico'),
     path('cadastroCombo/', views.cadastroComboServico, name='cadastroCombo'),
     path('cadastroCategoria/', views.cadastroCategoriaCliente, name='cadastroCategoriaCliente'),

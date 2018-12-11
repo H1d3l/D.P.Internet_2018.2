@@ -102,19 +102,22 @@ def criarContrato(request):
     else:
         form = CriarContratoForm()
         return render(request, 'criar_contrato.html', {'form':form})
-'''
-def edit_post(request,pk):
-    editpost = get_object_or_404(Post,pk=pk)
+
+def editarServico(request,pk):
+    editserv = get_object_or_404(Servico,pk=pk)
+
     if request.method == "POST":
-        form = PostForm(request.POST,instance=editpost)
+        form = CadastroServicoForm(request.POST,instance=editserv)
         if form.is_valid():
-            model_instance = form.save(commit=False)
-            model_instance.author = request.user
-            model_instance.data_published = timezone.now()
-            model_instance.save()
-            return redirect('list_post')
+            model_instance = form.save()
+            return redirect('listaServico')
     else:
-        form = PostForm(instance=editpost)
-        return render(request, 'add_post.html', {'form': form})
-'''
+        form = CadastroServicoForm(instance=editserv)
+        return render(request,'add_servico.html',{'form':form})
+
+
+def excluirServico(request,pk):
+    excluiserv = get_object_or_404(Servico,pk=pk)
+    excluiserv.delete()
+    return redirect('listaServico')
 
