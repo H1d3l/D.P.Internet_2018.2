@@ -12,7 +12,7 @@ class CategoriaCliente(models.Model):
 class Cliente(models.Model):
     nome = models.CharField(max_length=60,null=False)
     telefone = models.CharField(max_length=20,null=False)
-    categoria = models.OneToOneField(CategoriaCliente,on_delete=models.CASCADE)
+    categoria = models.ForeignKey(CategoriaCliente,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nome
