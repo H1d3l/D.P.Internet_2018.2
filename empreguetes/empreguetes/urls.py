@@ -23,6 +23,17 @@ urlpatterns = [
     path('servico/', views.listaServico, name='listaServico'),
     path('editarservico/<int:pk>', views.editarServico, name='editarServico'),
     path('excluiservico/<int:pk>', views.excluirServico, name='excluiServico'),
+    path('pesquisaDiarista/', views.pesquisarDiarista, name='pesquisaDiarista'),
+
+    path('editarCategoria/<int:pk>', views.editarCategoria, name='editarCategoria'),
+    path('excluiCategoria/<int:pk>', views.excluirCategoria, name='excluiCategoria'),
+
+    path('excluicliente/<int:pk>', views.excluirCliente, name='excluiCliente'),
+    path('editarcliente/<int:pk>', views.editarCliente, name='editarCliente'),
+    path('excluidiarista/<int:pk>', views.excluirDiarista, name='excluiDiarista'),
+    path('editardiarista/<int:pk>', views.editarDiarista, name='editarDiarista'),
+    path('excluifuncionario/<int:pk>', views.excluirFuncionario, name='excluiFuncionario'),
+    path('editarfuncionario/<int:pk>', views.editarFuncionario, name='editarFuncionario'),
 
     path('cadastroServico/',views.cadastroServico,name = 'cadastroServico'),
     path('cadastroCombo/', views.cadastroComboServico, name='cadastroCombo'),
@@ -36,5 +47,7 @@ urlpatterns = [
     path('listaDiarista/', views.listDiarista, name='listaDiarista'),
     path('criarContrato/', views.criarContrato, name='criarContrato'),
     path('listaContrato/', views.listContrato, name='listaContrato'),
+    path('lista-filtro/<filtro>/', views.resultadoPesquisa, name='listaFiltro'),
+
 
 ]

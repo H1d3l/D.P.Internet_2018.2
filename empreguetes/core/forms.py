@@ -1,5 +1,6 @@
 from django.forms import *
 from core.models import *
+from django import forms
 
 class CadastroServicoForm(ModelForm):
     class Meta:
@@ -39,3 +40,8 @@ class CriarContratoForm(ModelForm):
     class Meta:
         model = Contrato
         fields = '__all__'
+
+
+
+class PesquisaForm(forms.Form):
+    item = forms.CharField(label = 'Item a ser pesquisado',max_length = 100)

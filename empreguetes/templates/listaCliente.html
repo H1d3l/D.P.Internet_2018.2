@@ -10,7 +10,10 @@
         {% for cliente in clientes %}
             <h2>{{ cliente.nome }}</h2>
             <h2>{{ cliente.categoria }}</h2>
+            <a class="btn btn-primary" href="{% url 'editarCliente' cliente.pk %}">Editar </a>
+            <a class="btn btn-primary" href="{% url 'excluiCliente' cliente.pk %}">Excluir </a>
         {% endfor %}
+
     {% endblock %}
 
 </body>

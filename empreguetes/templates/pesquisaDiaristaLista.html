@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <ul>
+        {% for diarista in diaristas %}
+            <li><p> nome: {{ diarista.nome }}</p></li>
+        {% empty %}
+        <p>Não há diaristas cadastradas</p>
+    {% endfor %}
+    </ul>
+{% endblock %}
+
+

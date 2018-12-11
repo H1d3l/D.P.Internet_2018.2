@@ -61,8 +61,3 @@ class Contrato(models.Model):
     def __str__(self):
         return self.cliente.nome
 
-
-
-
-
-
