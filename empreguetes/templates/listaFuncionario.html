@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Funcionario</title>
+</head>
+<body>
+    {% block content %}
+        {% for funcionario in funcionarios %}
+            <h2> Nome: {{ funcionario.nome }}</h2>
+            <h2> Endereço: {{ funcionario.endereco }}</h2>
+            <a class="btn btn-primary" href="{% url 'editarFuncionario' funcionario.pk %}">Editar </a>
+            <a class="btn btn-primary" href="{% url 'excluiFuncionario' funcionario.pk %}">Excluir </a>
+        {% endfor %}
+    {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+    {% block content %}
+        <!--
+        <a href="{% url "listaServico"%}" >Serviços</a>
+        <a href="{% url "cadastroCategoriaCliente"%}" >Cadastro categoria</a>
+        <a href="{% url "listaCategoriaCliente"%}" >Listar categoria</a>
+        <a href="{% url "cadastroCliente"%}" >Cadastrar cliente</a>
+        <a href="{% url "listaClientes"%}" >Lista clientes</a>
+        <a href="{% url "cadastroFuncionario"%}" >Cadastro Funcionario</a>
+        <a href="{% url "listaFuncionario"%}" >Lista Funcionario</a>
+        <a href="{% url "cadastroDiarista"%}" >Cadastro Diarista</a>
+        <a href="{% url "listaDiarista"%}" >Lista Diarista</a>
+        <a href="{% url "criarContrato"%}" >Contrato</a>
+        <a href="{% url "listaContrato"%}" >Lista Contrato</a>-->
+
+
+        <ul>
+        <a href="{% url "listaServico"%}" >Serviços</a>
+        </ul>
+        <ul>
+        <a href="{% url "cadastroCategoriaCliente"%}" >Cadastro categoria |</a>
+        <a href="{% url "listaCategoriaCliente"%}" >Listar categoria |</a>
+        <a href="{% url "cadastroCliente"%}" >Cadastrar cliente |</a>
+        <a href="{% url "listaClientes"%}" >Lista clientes </a>
+        </ul>
+        <ul>
+        <a href="{% url "cadastroFuncionario"%}" >Cadastro Funcionario |</a>
+        <a href="{% url "listaFuncionario"%}" >Lista Funcionario</a>
+        </ul>
+        <ul>
+        <a href="{% url "cadastroDiarista"%}" >Cadastro Diarista |</a>
+        <a href="{% url "listaDiarista"%}" >Lista Diarista</a>
+        </ul>
+        <ul>
+        <a href="{% url "criarContrato"%}" >Contrato |</a>
+        <a href="{% url "listaContrato"%}" >Lista Contrato</a>
+        </ul>
+
+        <a href="{% url "pesquisaDiarista"%}" >Pesquisa Diarista</a>
+
+
+
+
+    {% endblock %}
+
+
+</body>
+</html>

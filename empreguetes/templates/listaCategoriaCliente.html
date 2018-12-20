@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% block content %}
+        {% for categorias in categoria %}
+            <h2>{{ categorias.nome }}</h2>
+            <h2>{{ categorias.desconto }}</h2>
+            <a class="btn btn-primary" href="{% url 'editarCategoria' categorias.pk %}">Editar </a>
+            <a class="btn btn-primary" href="{% url 'excluiCategoria' categorias.pk %}">Excluir </a>
+        {% endfor %}
+    {% endblock %}
+
+</body>
+</html>

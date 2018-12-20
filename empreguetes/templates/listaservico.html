@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    {% block content %}
+        <h1>Serviços Cadastrados</h1>
+        {% for servico in servicos %}
+            <h2>{{servico.nome}}</h2>
+            <p>Valor: {{servico.valor|linebreaksbr}}</p>
+            <a class="btn btn-primary" href="{% url 'editarServico' servico.pk %}">Editar </a>
+            <a class="btn btn-primary" href="{% url 'excluiServico' servico.pk %}">Excluir </a>
+
+
+        {% endfor %}
+        {% for combo in combos %}
+            <h2>{{combo.nome}}</h2>
+            {% for servico in combo.servico.all %}
+                <h4>{{servico}}</h4>
+            {% endfor %}
+            <p>Valor: {{combo.valor|linebreaksbr}}</p>
+        {% endfor %}
+
+
+        <a href="{% url 'cadastroServico' %}">Adicionar Serviço</a>
+        <a href="{% url 'cadastroCombo' %}">Adicionar Combo de Serviços</a>
+
+
+     {% endblock %}
+
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+</head>
+<body>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+        <div class="header" align="center">
+            <h1><a href="/"> Empreguetes</a></h1>
+        </div>
+    </nav>
+    <div class="content container" align="center">
+        <div class="row">
+            <div class="col-md-12">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

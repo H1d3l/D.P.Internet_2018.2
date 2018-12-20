@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Diaristas</title>
+</head>
+<body>
+{% block content %}
+    {% for diarista in diaristas %}
+        <h2>{{ diarista.nome }}</h2>
+
+        {% for i in diarista.servico.all %}
+            <h2>{{ i }}</h2>
+            <a class="btn btn-primary" href="{% url 'editarDiarista' diarista.pk %}">Editar </a>
+            <a class="btn btn-primary" href="{% url 'excluiDiarista' diarista.pk %}">Excluir </a>
+        {% endfor %}
+
+    {% endfor %}
+{% endblock %}
+
+</body>
+</html>
