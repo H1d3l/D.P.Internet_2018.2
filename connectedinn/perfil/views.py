@@ -22,9 +22,7 @@ def exibir_perfil(request, perfil_id):
 def convidar(request, perfil_id):
     perfil_a_convidar = Perfil.objects.get(id=perfil_id)
     perfil_logado = get_perfil_logado(request)
-
-    if (perfil_logado.pode_convidar(perfil_a_convidar)):
-        perfil_logado.convidar(perfil_a_convidar)
+    perfil_logado.convidar(perfil_a_convidar)
 
     return redirect('index')
 
@@ -38,4 +36,13 @@ def aceitar(request, convite_id):
     convite.aceitar()
     return redirect('index')
 
+def recusar(request,convite_id):
+    convite = Convite.objects.get(id = convite_id)
+    convite.recusar()
+    return redirect('index')
 
+def desfazer_amizade(request,perfil_id):
+    amigo = Perfil.objects.get(id = perfil_id)
+    perfil_logado = get_perfil_logado(request)
+    perfil_logado.desfazer_amizade(amigo)
+    return redirect('index')

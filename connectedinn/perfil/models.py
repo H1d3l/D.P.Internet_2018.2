@@ -19,9 +19,19 @@ class Perfil(models.Model):
         return self.nome
 
     def convidar(self, perfil_convidado):
-        if self.pode_convidar(perfil_convidado):
-            convite = Convite(solicitante=self,convidado = perfil_convidado)
-            convite.save()
+        convite = Convite(solicitante=self,convidado = perfil_convidado)
+        convite.save()
+
+    def desfazer_amizade(self,perfil_id):
+        self.contatos.remove(perfil_id)
+
+
+
+
+
+
+
+
 
 
 class Convite(models.Model):
@@ -31,4 +41,7 @@ class Convite(models.Model):
     def aceitar(self):
         self.solicitante.contatos.add(self.convidado)
         self.convidado.contatos.add(self.solicitante)
+        self.delete()
+
+    def recusar(self):
         self.delete()
