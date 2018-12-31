@@ -27,10 +27,10 @@ urlpatterns = [
     path('convite/<int:convite_id>/aceitar',views.aceitar, name='aceitar'),
     path('convite/<int:convite_id>/recusar', views.recusar, name='recusar'),
     path('perfil/<int:perfil_id>/desfazer_amizade', views.desfazer_amizade, name='desfazer'),
-
     path('registrar/', RegistrarUsuarioView.as_view(), name='registrar'),
     path('login/',v.LoginView.as_view(template_name = 'login.html'),name = 'login'),
     path('logout/',v.LogoutView.as_view(template_name = 'login.html'),name = 'logout'),
+    path('password/',views.alterar_senha,name = 'alterar_senha')
 ]
 
 
