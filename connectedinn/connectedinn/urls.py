@@ -14,10 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from perfil import views
 from usuario.views import *
-from django.contrib.auth import views as v
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,9 +28,20 @@ urlpatterns = [
     path('convite/<int:convite_id>/recusar', views.recusar, name='recusar'),
     path('perfil/<int:perfil_id>/desfazer_amizade', views.desfazer_amizade, name='desfazer'),
     path('registrar/', RegistrarUsuarioView.as_view(), name='registrar'),
-    path('login/',v.LoginView.as_view(template_name = 'login.html'),name = 'login'),
-    path('logout/',v.LogoutView.as_view(template_name = 'login.html'),name = 'logout'),
-    path('password/',views.alterar_senha,name = 'alterar_senha')
+    path('login/',auth_views.LoginView.as_view(template_name = 'login.html'),name = 'login'),
+    path('logout/',auth_views.LogoutView.as_view(template_name = 'login.html'),name = 'logout'),
+    path('password/',views.alterar_senha,name = 'alterar_senha'),
+    #path('registration/',include('django.contrib.auth.urls')),
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name = 'registration/password_reset_form.html')
+         ,name ='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name = 'registration/password_reset_done.html'),
+     name ='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name = 'registration/password_reset_confirm.html'),
+     name ='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name = 'registration/password_reset_complete.html'),
+     name ='password_reset_complete')
+
+
 ]
 
 

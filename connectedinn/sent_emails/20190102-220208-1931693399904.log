@@ -1,0 +1,54 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: TestSite password reset
+From: webmaster@localhost
+To: hidels.rios@gmail.com
+Date: Thu, 03 Jan 2019 00:02:09 -0000
+Message-ID: <154647372909.7340.4076247556705355264@DESKTOP-VDRKIEN>
+
+
+
+
+<!doctype html>
+<html lang = "pt-br">
+	<head>
+		<meta charset="utf-8">
+		<title>ConnectedIn</title>
+		<link rel="stylesheet" 
+			 href="/static/styles/bootstrap.css">
+		<link rel="stylesheet" 
+			 href="/static/styles/main.css">
+
+	</head>
+	<body>
+		<div class="container">
+			<div class = "header">
+				<ul class = "nav nav-pills pull-right">
+					<li><a href = "/"></a></li>
+					<li><a href = "/logout/">Logout</a></li>
+				</ul>
+				<h3 class = "text-muted">ConnectedIn</h3>
+			</div>
+			
+			<div class="row content">
+				
+    
+    To initiate the password reset process for your hidel TestSite Account,
+    click the link below:
+
+    http://127.0.0.1:8000/reset/MTM/52n-ee72d02f3a07f025f8c2/
+
+    If clicking the link above doesn't work, please copy and paste the URL in a new browser
+    window instead.
+
+    Sincerely,
+    The TestSite Team
+    >
+
+				
+			</div>		
+		</div>	
+	</body>
+</html>
+-------------------------------------------------------------------------------
