@@ -16,4 +16,8 @@ class Postagem(models.Model):
         return self.title
 
 
+    def excluir_postagem(self):
+        self.delete()
+
+
 

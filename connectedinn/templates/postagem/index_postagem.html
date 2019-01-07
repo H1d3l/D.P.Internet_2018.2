@@ -1,18 +1,23 @@
 {% extends 'base.html' %}
 
 {% block body %}
-        {% for postagem in minhas_postagens %}
-            <h1>{{ postagem.title }}</h1>
-            <h4>{{ postagem.author }}</h4>
-            <p>{{ postagem.published_date }}</p>
+        {% for postagem in postagens %}
+            {% if postagem.author_id == perfil_logado.id %}
+                <h1>{{ postagem.title }}</h1>
+                <h4>{{ postagem.author }}</h4>
+                <p>{{ postagem.published_date }}</p>
+                <p>{{ postagem.id }}</p>
+                <a>Excluir</a>
+            {% else %}
+                <h1>{{ postagem.title }}</h1>
+                <h4>{{ postagem.author }}</h4>
+                <p>{{ postagem.published_date }}</p>
+                <p>{{ postagem.id }}</p>
+
+            {% endif %}
 
         {% endfor %}
-        {% for postagem in postagens_amigos  %}
-            <h1>{{ postagem.title}}</h1>
-            <h4>{{ postagem.author}}</h4>
-            <p>{{ postagem.published_date }}</p>
 
-        {% endfor %}
     <div>
         <a href="{% url 'criar_post' %}">Criar postagem</a>
     </div>

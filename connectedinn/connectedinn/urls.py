@@ -23,6 +23,7 @@ from post import views as postview
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',postview.list_post ,name='index'),
+    #path('index/<int:postagem_id>',postview.excluir_postagem,name = 'excluir_postagem'),
     #path('',perfilview.index,name='index'),
     path('perfil/<int:perfil_id>', perfilview.exibir_perfil, name='exibir'),
     path('perfil/<int:perfil_id>/convidar',perfilview.convidar, name='convidar'),
@@ -46,6 +47,7 @@ urlpatterns = [
     path('lista-filtro/<filtro>/', perfilview.resultado_pesquisa_user, name='listaFiltro'),
     path('usuarios/',perfilview.lista_user,name='listaUser'),
     path('usuarios/<int:usuario_id>/',perfilview.super_user,name = 'super_user'),
+
 
 
 ]

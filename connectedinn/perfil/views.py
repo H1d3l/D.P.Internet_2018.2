@@ -28,7 +28,6 @@ def convidar(request, perfil_id):
     perfil_a_convidar = Perfil.objects.get(id=perfil_id)
     perfil_logado = get_perfil_logado(request)
     perfil_logado.convidar(perfil_a_convidar)
-
     return redirect('index')
 
 @login_required
