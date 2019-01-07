@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    {% for usuario in usuarios %}
+        {{ usuario }}
+        {{ usuario.id }}
+        <a href = "{% url 'super_user' usuario.id %}">Tornar Super</a>
+    {% endfor %}
+
+{% endblock %}

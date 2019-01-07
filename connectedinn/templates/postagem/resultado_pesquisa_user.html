@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    {% for usuario in usuarios %}
+        {% if usuario.usuario.perfil in perfil_logado.contatos.all %}
+            {{ usuario.nome }}
+        {% else %}
+            <ul>
+                <li>{{ usuario.nome }}</li>
+                <a href = "{% url 'convidar' usuario.id %}">Convidar</a>
+            </ul>
+
+        {% endif %}
+
+    {% endfor %}
+
+{% endblock %}

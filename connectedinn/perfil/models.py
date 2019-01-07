@@ -38,3 +38,4 @@ class Convite(models.Model):
 
     def recusar(self):
         self.delete()
+

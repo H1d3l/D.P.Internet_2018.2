@@ -1,10 +1,13 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from perfil.models import Perfil, Convite
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+from perfil.forms import *
+from django.urls import reverse
 
 # Create your views here.
 @login_required
@@ -63,3 +66,33 @@ def alterar_senha(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'alterar_senha.html', {'form': form})
+@login_required
+def pesquisar_user(request):
+    form = PesquisaUsuariosForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            filtro = form.cleaned_data['item']
+            return HttpResponseRedirect(reverse('listaFiltro', args=(filtro,)))
+    return render(request, 'postagem/pesquisa_user.html', {'form': form})
+
+@login_required
+def resultado_pesquisa_user(request,filtro):
+    filtro = Perfil.objects.filter(nome=filtro)
+    return render(request,'postagem/resultado_pesquisa_user.html',{'usuarios':filtro,
+                                                                   'perfil_logado': get_perfil_logado(request)})
+
+def super_user(request,usuario_id):
+    usuario = Perfil.objects.get(id=usuario_id)
+    usuario_is_super = usuario.usuario.is_superuser = True
+    usuario.usuario.save()
+    return redirect('index')
+
+
+def lista_user(request):
+    perfil_logado = get_perfil_logado(request)
+    if perfil_logado.usuario.is_superuser:
+        usuarios = Perfil.objects.all()
+        return render(request, 'postagem/lista_user.html',{'usuarios':usuarios})
+    else:
+        return HttpResponse("Você não é um super usuario")
+
