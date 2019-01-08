@@ -14,8 +14,7 @@ def get_perfil_logado(request):
 def list_post(request):
     perfil_logado = get_perfil_logado(request)
 
-    postagens = Postagem.objects.exclude(author_id__in=perfil_logado.bloqueado.all())\
-        .filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all()))\
+    postagens = Postagem.objects.filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all()))\
         .order_by('-published_date')
     return render(request,'postagem/index_postagem.html',{'postagens':postagens,'perfil_logado':get_perfil_logado(request)})
 

@@ -53,8 +53,15 @@ def desfazer_amizade(request,perfil_id):
     return redirect('index')
 
 def bloquear(request,perfil_id):
+    amigo = Perfil.objects.get(id = perfil_id)
     perfil_logado = get_perfil_logado(request)
-    perfil_logado.bloquear(perfil_id)
+    perfil_logado.bloquear_contato(amigo)
+    return redirect('index')
+
+def desbloquear(request,perfil_id):
+    amigo = Perfil.objects.get(id=perfil_id)
+    perfil_logado = get_perfil_logado(request)
+    perfil_logado.desbloquear_contato(amigo)
     return redirect('index')
 
 

@@ -22,10 +22,11 @@ from post import views as postview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',postview.list_post ,name='index'),
+    #path('',postview.list_post ,name='index'),
     path('index/<int:postagem_id>',postview.excluir_postagem,name = 'excluir_postagem'),
-    #path('',perfilview.index,name='index'),
-    path('perfi/<int:perfil_id>',perfilview.bloquear,name = 'bloquear'),
+    path('',perfilview.index,name='index'),
+    path('perfi/<int:perfil_id>/bloquear',perfilview.bloquear,name = 'bloquear'),
+    path('perfi/<int:perfil_id>/desbloquear',perfilview.desbloquear,name = 'desbloquear'),
     path('perfil/<int:perfil_id>', perfilview.exibir_perfil, name='exibir'),
     path('perfil/<int:perfil_id>/convidar',perfilview.convidar, name='convidar'),
     path('convite/<int:convite_id>/aceitar',perfilview.aceitar, name='aceitar'),

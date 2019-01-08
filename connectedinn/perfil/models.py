@@ -15,7 +15,7 @@ class Perfil(models.Model):
     nome_empresa = models.CharField(max_length=255, null=False)
     contatos = models.ManyToManyField('self')
     usuario = models.OneToOneField(User,related_name="perfil",on_delete=models.CASCADE)
-    bloqueado = models.ManyToManyField('self')
+    contatos_bloqueados = models.ManyToManyField('self',related_name='meus_contatos_bloqueados', symmetrical=False, through="Bloqueio")
 
 
 
@@ -41,13 +41,15 @@ class Perfil(models.Model):
     def desfazer_amizade(self,perfil_id):
         self.contatos.remove(perfil_id)
 
-    def bloquear(self,perfil_id):
-        amigo = Perfil.objects.get(id=perfil_id)
-        self.bloqueado.add(amigo)
+    def bloquear_contato(self,perfil):
+        bloqueio = Bloqueio(perfil_bloqueador=self,perfil_bloqueado=perfil)
+        bloqueio.save()
 
-    def desbloquear(self,perfil_id):
-        amigo = Perfil.objects.get(id=perfil_id)
-        self.bloqueado.remove(amigo)
+    def desbloquear_contato(self,perfil):
+        print(1111111111111111111111)
+        bloqueios = Bloqueio.objects.filter(perfil_bloqueador = self, perfil_bloqueado=perfil).all()
+        for b in bloqueios:
+            b.delete()
 
 
 class Convite(models.Model):
@@ -61,4 +63,10 @@ class Convite(models.Model):
 
     def recusar(self):
         self.delete()
+
+class Bloqueio(models.Model):
+    perfil_bloqueador = models.ForeignKey(Perfil,on_delete=models.CASCADE,related_name='bloqueador')
+    perfil_bloqueado = models.ForeignKey(Perfil,on_delete=models.CASCADE,related_name='bloqueado')
+
+
 
