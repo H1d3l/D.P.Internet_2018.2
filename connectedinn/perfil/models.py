@@ -1,8 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib import messages
-from django.http import request
-
 
 
 
@@ -16,8 +13,6 @@ class Perfil(models.Model):
     contatos = models.ManyToManyField('self')
     usuario = models.OneToOneField(User,related_name="perfil",on_delete=models.CASCADE)
     contatos_bloqueados = models.ManyToManyField('self',related_name='meus_contatos_bloqueados', symmetrical=False, through="Bloqueio")
-
-
 
     @property
     def email(self):
@@ -46,7 +41,6 @@ class Perfil(models.Model):
         bloqueio.save()
 
     def desbloquear_contato(self,perfil):
-        print(1111111111111111111111)
         bloqueios = Bloqueio.objects.filter(perfil_bloqueador = self, perfil_bloqueado=perfil).all()
         for b in bloqueios:
             b.delete()

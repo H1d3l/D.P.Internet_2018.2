@@ -22,7 +22,6 @@ def exibir_perfil(request, perfil_id):
     return render(request, 'perfil.html',
                   {'perfil': perfil,
                    'perfil_logado': get_perfil_logado(request)})
-
 @login_required
 def convidar(request, perfil_id):
     perfil_a_convidar = Perfil.objects.get(id=perfil_id)
