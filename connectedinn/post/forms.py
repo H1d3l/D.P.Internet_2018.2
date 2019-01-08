@@ -6,4 +6,4 @@ from post.models import *
 class PostForm(ModelForm):
     class Meta:
         model = Postagem
-        fields = '__all__'
+        fields = ['title','text']

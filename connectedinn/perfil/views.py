@@ -27,7 +27,8 @@ def exibir_perfil(request, perfil_id):
 def convidar(request, perfil_id):
     perfil_a_convidar = Perfil.objects.get(id=perfil_id)
     perfil_logado = get_perfil_logado(request)
-    perfil_logado.convidar(perfil_a_convidar)
+    if(perfil_logado.pode_convidar(perfil_a_convidar)):
+        perfil_logado.convidar(perfil_a_convidar)
     return redirect('index')
 
 @login_required
@@ -50,6 +51,12 @@ def desfazer_amizade(request,perfil_id):
     perfil_logado = get_perfil_logado(request)
     perfil_logado.desfazer_amizade(amigo)
     return redirect('index')
+
+def bloquear(request,perfil_id):
+    perfil_logado = get_perfil_logado(request)
+    perfil_logado.bloquear(perfil_id)
+    return redirect('index')
+
 
 @login_required
 def alterar_senha(request):

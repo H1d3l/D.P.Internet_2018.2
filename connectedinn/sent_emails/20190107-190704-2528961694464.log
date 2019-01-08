@@ -1,0 +1,60 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: TestSite password reset
+From: webmaster@localhost
+To: hidels.rios@gmail.com
+Date: Mon, 07 Jan 2019 21:07:04 -0000
+Message-ID: <154689522425.10304.15914774710475140272@DESKTOP-VDRKIEN.ifpi.int>
+
+
+
+
+<!doctype html>
+<html lang = "pt-br">
+	<head>
+		<meta charset="utf-8">
+		<title>ConnectedIn</title>
+		<link rel="stylesheet" 
+			 href="/static/styles/bootstrap.css">
+		<link rel="stylesheet" 
+			 href="/static/styles/main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
+
+	</head>
+	<body>
+		<div class="container">
+			<div class = "header">
+				<ul class = "nav nav-pills pull-right">
+					<li><a href = "/"></a></li>
+					<li><a href = "/logout/">Logout</a></li>
+                    <li><a href="/pesquisa/">Pesquisar Usuário</a> </li>
+                    <li><a href="/usuarios/">Listar Usuário</a> </li>
+				</ul>
+				<h3 class = "text-muted">ConnectedIn</h3>
+			</div>
+			
+			<div class="row content">
+				
+    
+    To initiate the password reset process for your admin TestSite Account,
+    click the link below:
+
+    http://127.0.0.1:8000/reset/MTc/52s-9dfbda645d606ba56620/
+
+    If clicking the link above doesn't work, please copy and paste the URL in a new browser
+    window instead.
+
+    Sincerely,
+    The TestSite Team
+    >
+
+				
+			</div>		
+		</div>	
+	</body>
+</html>
+-------------------------------------------------------------------------------

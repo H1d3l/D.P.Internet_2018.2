@@ -13,7 +13,10 @@ def get_perfil_logado(request):
 @login_required
 def list_post(request):
     perfil_logado = get_perfil_logado(request)
-    postagens = Postagem.objects.filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all())).order_by('-published_date')
+
+    postagens = Postagem.objects.exclude(author_id__in=perfil_logado.bloqueado.all())\
+        .filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all()))\
+        .order_by('-published_date')
     return render(request,'postagem/index_postagem.html',{'postagens':postagens,'perfil_logado':get_perfil_logado(request)})
 
 @login_required
@@ -21,6 +24,8 @@ def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
+            temp = form.save(commit=False)
+            temp.author = request.user.perfil
             form.save()
             return redirect('index')
     else:
