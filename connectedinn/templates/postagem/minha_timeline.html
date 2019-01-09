@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="col-lg-2">
+        <div class="card text-center" >
+          <div class="card-header">
+            Meus contatos
+          </div>
+            {% if contatos %}
+                {% for contato in contatos %}
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item"><a href = "{% url 'exibir' contato.id %}">{{ contato.nome }}</a></li>
+                    </ul>
+                {% endfor %}
+            {% else %}
+                <p>Você ainda não possui amigos</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-lg-8">
+    {% for postagem in postagens %}
+        <div class="card">
+          <div class="card-header">
+            <p>{{ postagem.title }}</p>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p>{{ postagem.text }}</p>
+              <footer class="blockquote-footer">{{ postagem.published_date }}<cite title="Source Title">{{ postagem.author }}</cite></footer>
+            </blockquote>
+          </div>
+        </div>
+    {% endfor %}
+    </div>
+    <div class="col-lg-2">
+        {% if contatos_bloqueados %}
+        <div class="card text-center" >
+          <div class="card-header">
+            Meus contatos bloqueados
+          </div>
+                {% for contato in contatos_bloqueados %}
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item"><a href = "{% url 'exibir' contato.id %}">{{ contato.nome }}</a></li>
+                        </ul>
+                {% endfor %}
+        </div>
+        {% else %}
+
+            <div class="card text-center ">
+              <h5 class="card-header">Contatos bloqueados</h5>
+              <div class="card-body">
+                <p class="card-text">Não há contatos bloqueados</p>
+              </div>
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
+
+{% endblock %}

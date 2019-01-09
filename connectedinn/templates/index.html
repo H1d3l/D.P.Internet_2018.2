@@ -3,7 +3,7 @@
 
 <div class="col-lg-2">
     <div class="perfis_index">
-        <div class="card text-center" style="width: 16rem;">
+        <div class="card text-center" >
           <div class="card-header">
             Todos os Perfis
           </div>
@@ -21,15 +21,72 @@
 
 </div>
 <div class="col-lg-8">
+    <div class="campo_de_postagem">
+        <form action="{% url 'criar_post' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <textarea placeholder="No que você está pensando?" class="form-control" name="text" rows="3"></textarea>
+                <button type="submit" class="btn btn-link">Compartilhar</button>
+            </div>
+        </form>
+    </div>
+    <div class="timeline">
+        {% for postagem in postagens %}
+            {% if postagem.author_id == perfil_logado.id %}
+                <div class="card">
+                  <div class="card-header">
+                    <p>{{ postagem.title }}</p>
+                  </div>
+                  <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                      <p>{{ postagem.text }}</p>
+                      <footer class="blockquote-footer">{{ postagem.published_date }}<cite title="Source Title">{{ postagem.author }}</cite></footer>
+                    </blockquote>
+                      <button type="button" class="btn btn-info btn-sm float-right " data-toggle="modal" data-target="#confirm">Excluir</button>
+                        <div class="modal fade" id="confirm" role="dialog">
+                          <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                              <div class="modal-body">
+                                    <p> Deseja realmente excluir a postagem?</p>
+                              </div>
+                              <div class="modal-footer">
+                                <a href="{% url 'excluir_postagem' postagem.id%}" type="button" class="btn btn-danger" id="delete">Excluir</a>
+                                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            {% else %}
+                <div class="card">
+                  <div class="card-header">
+                    <p>{{ postagem.title }}</p>
+                  </div>
+                  <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                      <p>{{ postagem.text }}</p>
+                      <footer class="blockquote-footer">{{ postagem.published_date }}<cite title="Source Title">{{ postagem.author }}</cite></footer>
+                    </blockquote>
+                  </div>
+                </div>
+            {% endif %}
+
+        {% endfor %}
+
+    </div>
 
 </div>
 <div class="col-lg-2">
     <div class="convites">
         {% with total=perfil_logado.convites_recebidos.count %}
             {% if total %}
-                <div class="card text-center" style="width: 16rem;">
+                <div class="card text-center" >
                   <div class="card-header">
-                    {{ total }}Convite{{ total|pluralize }} aguardando aprovação
+                    {{ total }} Convite{{ total|pluralize }} aguardando aprovação
                   </div>
                     {% for convite in perfil_logado.convites_recebidos.all %}
                   <ul class="list-group list-group-flush">

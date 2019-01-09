@@ -8,20 +8,34 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from perfil.forms import *
 from django.urls import reverse
+from post.models import *
+from django.db.models import Q
 
 # Create your views here.
 @login_required
 def index(request):
+    perfil_logado = get_perfil_logado(request)
+    postagens = Postagem.objects.filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all()))\
+        .order_by('-published_date')
     return render(request, 'index.html', {'perfis': Perfil.objects.all(),
-                                          'perfil_logado': get_perfil_logado(request)})
+                                          'perfil_logado': get_perfil_logado(request),'postagens':postagens})
+
+def meu_perfil(request):
+    perfil_logado = get_perfil_logado(request)
+    postagens = Postagem.objects.filter(author=perfil_logado).order_by('-published_date')
+    contatos = perfil_logado.contatos.all()
+    contatos_bloqueados = Perfil.objects.filter(contatos_bloqueados__in=perfil_logado.contatos_bloqueados.all())
+    return render(request,'postagem/minha_timeline.html',{'postagens':postagens,
+                                                          'contatos':contatos,'contatos_bloqueados':contatos_bloqueados})
+
 
 @login_required
 def exibir_perfil(request, perfil_id):
     perfil = Perfil.objects.get(id=perfil_id)
-
+    postagens = Postagem.objects.filter(author=perfil).order_by('-published_date')
     return render(request, 'perfil.html',
                   {'perfil': perfil,
-                   'perfil_logado': get_perfil_logado(request)})
+                   'perfil_logado': get_perfil_logado(request),'postagens':postagens})
 @login_required
 def convidar(request, perfil_id):
     perfil_a_convidar = Perfil.objects.get(id=perfil_id)
@@ -78,14 +92,16 @@ def alterar_senha(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'alterar_senha.html', {'form': form})
+
 @login_required
 def pesquisar_user(request):
     form = PesquisaUsuariosForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
-            filtro = form.cleaned_data['item']
+            filtro = form.cleaned_data['nome']
             return HttpResponseRedirect(reverse('listaFiltro', args=(filtro,)))
-    return render(request, 'postagem/pesquisa_user.html', {'form': form})
+    else:
+        redirect('index')
 
 @login_required
 def resultado_pesquisa_user(request,filtro):

@@ -6,7 +6,9 @@
 	<head>
 		<meta charset="utf-8">
 		<title>ConnectedIn</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="{% static 'styles/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'styles/main.css' %}">
         <script src="{% static 'scripts/jquery-3.3.1.js' %}"></script>
         <script src="{% static 'scripts/bootstrap.js' %}"></script>
         <script src="{% static 'scripts/popper.js' %}"></script>
@@ -14,7 +16,7 @@
 	</head>
 	<body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">Connectedin</a>
+          <a class="navbar-brand" href = "{% url 'index' %}">Connectedin</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -22,12 +24,12 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href = "{% url 'index' %}">{{ perfil_logado.nome }}<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href = "{% url 'meu_perfil'  %}">{{ perfil_logado.nome }}<span class="sr-only">(current)</span></a>
               </li>
-                <form class="form-inline my-2 my-lg-0" method="post">
+                <form action="{% url 'pesquisar_user' %}" class="form-inline my-2 my-lg-0" method="post">
                     {% csrf_token %}
-                  <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar Usuário" aria-label="Search">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  <input name = 'nome' class="form-control mr-sm-2" type="search" placeholder="Pesquisar Usuário" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
                 </form>
               <li class="nav-item">
                 <a class="nav-link" href="/logout/">Logout</a>

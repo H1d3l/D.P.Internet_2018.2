@@ -2,17 +2,38 @@
 
 
 {% block body %}
+    <div class="col-lg-12">
     {% for usuario in usuarios %}
         {% if usuario.usuario.perfil in perfil_logado.contatos.all %}
-            {{ usuario.nome }}
+            <div class="card">
+              <div class="card-header">
+                  Vocês já são amigos. Parabéns!!!! :)
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{ usuario.nome }}</h5>
+                <p class="card-text">{{ usuario.nome_empresa }}</p>
+                <p class="card-text">{{ usuario.email }}</p>
+              </div>
+            </div>
         {% else %}
-            <ul>
-                <li>{{ usuario.nome }}</li>
-                <a href = "{% url 'convidar' usuario.id %}">Convidar</a>
-            </ul>
+            <div class="card">
+              <div class="card-header">
+                  Vocês ainda não são amigos. Vamos convidar? :)
 
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{ usuario.nome }}</h5>
+                <p class="card-text">{{ usuario.nome_empresa }}</p>
+                <p class="card-text">{{ usuario.email }}</p>
+                <a href = "{% url 'convidar' usuario.id %}" class="btn btn-primary">Convidar</a>
+
+              </div>
+            </div>
         {% endif %}
 
     {% endfor %}
+
+
+    </div>
 
 {% endblock %}

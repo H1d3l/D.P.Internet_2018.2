@@ -13,23 +13,23 @@ def get_perfil_logado(request):
 @login_required
 def list_post(request):
     perfil_logado = get_perfil_logado(request)
-
     postagens = Postagem.objects.filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all()))\
         .order_by('-published_date')
-    return render(request,'postagem/index_postagem.html',{'postagens':postagens,'perfil_logado':get_perfil_logado(request)})
+    return render(request,'index.html',{'postagens':postagens,'perfil_logado':get_perfil_logado(request)})
 
 @login_required
 def create_post(request):
+    form = PostForm(request.POST)
     if request.method == 'POST':
-        form = PostForm(request.POST)
         if form.is_valid():
-            temp = form.save(commit=False)
+            dados_form = form.cleaned_data
+            temp = Postagem()
             temp.author = request.user.perfil
-            form.save()
+            temp.text = dados_form['text']
+            temp.save()
             return redirect('index')
     else:
-        form = PostForm()
-        return render(request, 'postagem/criar_post.html',{'form':form})
+        return redirect('index')
 
 def excluir_postagem(request,postagem_id):
     postagem = Postagem.objects.get(id = postagem_id)

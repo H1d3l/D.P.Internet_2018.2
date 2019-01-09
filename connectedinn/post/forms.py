@@ -1,9 +1,8 @@
 from django.forms import ModelForm
 from post.models import *
+from django import forms
 
 
 
-class PostForm(ModelForm):
-    class Meta:
-        model = Postagem
-        fields = ['title','text']
+class PostForm(forms.Form):
+    text = forms.CharField(required=True)
