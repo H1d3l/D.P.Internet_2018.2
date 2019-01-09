@@ -28,7 +28,7 @@
               </li>
                 <form action="{% url 'pesquisar_user' %}" class="form-inline my-2 my-lg-0" method="post">
                     {% csrf_token %}
-                  <input name = 'nome' class="form-control mr-sm-2" type="search" placeholder="Pesquisar Usuário" aria-label="Search">
+                  <input required name = 'nome' class="form-control mr-sm-2" type="search" placeholder="Pesquisar Usuário" aria-label="Search">
                   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
                 </form>
               <li class="nav-item">

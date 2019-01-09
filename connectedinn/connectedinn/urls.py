@@ -47,7 +47,6 @@ urlpatterns = [
     path('index/',postview.create_post,name = 'criar_post'),
     path('pesquisa/',perfilview.pesquisar_user,name='pesquisar_user'),
     path('lista-filtro/<filtro>/', perfilview.resultado_pesquisa_user, name='listaFiltro'),
-    path('usuarios/',perfilview.lista_user,name='listaUser'),
     path('usuarios/<int:usuario_id>/',perfilview.super_user,name = 'super_user'),
 
 

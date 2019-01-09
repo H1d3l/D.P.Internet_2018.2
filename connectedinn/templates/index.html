@@ -25,7 +25,7 @@
         <form action="{% url 'criar_post' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <textarea placeholder="No que você está pensando?" class="form-control" name="text" rows="3"></textarea>
+                <textarea required placeholder="No que você está pensando?" class="form-control" name="text" rows="3"></textarea>
                 <button type="submit" class="btn btn-link">Compartilhar</button>
             </div>
         </form>

@@ -15,12 +15,18 @@
         <a href="{% url 'alterar_senha' %}">
             Alterar Senha
         </a>
+        <a href="{% url 'desfazer' perfil.id%}">
+            Desfazer amizade</a>
+
 
         <a href="{% url 'bloquear' perfil.id %}">
             Bloquear
         </a>
         <a href="{% url 'desbloquear' perfil.id %}">
             Desbloquear
+        </a>
+        <a href="{% url 'super_user' perfil.id %}">
+            Promover a super usuario
         </a>
 </div>
 <div class="col-lg-8">

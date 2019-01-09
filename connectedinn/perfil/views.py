@@ -69,13 +69,13 @@ def bloquear(request,perfil_id):
     amigo = Perfil.objects.get(id = perfil_id)
     perfil_logado = get_perfil_logado(request)
     perfil_logado.bloquear_contato(amigo)
-    return redirect('index')
+    return redirect('meu_perfil')
 
 def desbloquear(request,perfil_id):
     amigo = Perfil.objects.get(id=perfil_id)
     perfil_logado = get_perfil_logado(request)
     perfil_logado.desbloquear_contato(amigo)
-    return redirect('index')
+    return redirect('meu_perfil')
 
 
 @login_required
@@ -105,22 +105,20 @@ def pesquisar_user(request):
 
 @login_required
 def resultado_pesquisa_user(request,filtro):
-    filtro = Perfil.objects.filter(nome=filtro)
-    return render(request,'postagem/resultado_pesquisa_user.html',{'usuarios':filtro,
-                                                                   'perfil_logado': get_perfil_logado(request)})
+    filtro1 = Perfil.objects.filter(nome=filtro)
+    filtro2 = User.objects.filter(nome=filtro)
+    return render(request,'postagem/resultado_pesquisa_user.html',{'usuarios':filtro1,
+                                                                   'perfil_logado': get_perfil_logado(request),
+                                                                   'users':filtro2})
 
 def super_user(request,usuario_id):
-    usuario = Perfil.objects.get(id=usuario_id)
-    usuario_is_super = usuario.usuario.is_superuser = True
-    usuario.usuario.save()
-    return redirect('index')
-
-
-def lista_user(request):
     perfil_logado = get_perfil_logado(request)
-    if perfil_logado.usuario.is_superuser:
-        usuarios = Perfil.objects.all()
-        return render(request, 'postagem/lista_user.html',{'usuarios':usuarios})
+    if (perfil_logado.usuario.is_superuser):
+        usuario = Perfil.objects.get(id=usuario_id)
+        usuario_is_super = usuario.usuario.is_superuser = True
+        usuario.usuario.save()
     else:
         return HttpResponse("Você não é um super usuario")
+    return redirect('index')
+
 

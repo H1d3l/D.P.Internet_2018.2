@@ -41,9 +41,10 @@ class Perfil(models.Model):
         bloqueio.save()
 
     def desbloquear_contato(self,perfil):
-        bloqueios = Bloqueio.objects.filter(perfil_bloqueador = self, perfil_bloqueado=perfil).all()
-        for b in bloqueios:
-            b.delete()
+        bloqueio = Bloqueio.objects.filter(perfil_bloqueador = self, perfil_bloqueado=perfil)#.all()
+        #for b in bloqueios:
+         #   b.delete()
+        bloqueio.delete()
 
 
 class Convite(models.Model):
