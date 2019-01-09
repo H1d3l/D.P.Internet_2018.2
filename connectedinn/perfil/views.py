@@ -15,7 +15,8 @@ from django.db.models import Q
 @login_required
 def index(request):
     perfil_logado = get_perfil_logado(request)
-    postagens = Postagem.objects.filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all()))\
+    perfis_bloqueados = perfil_logado.contatos_bloqueados.all()
+    postagens = Postagem.objects.exclude(author_id__in=perfis_bloqueados).filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all()))\
         .order_by('-published_date')
     return render(request, 'index.html', {'perfis': Perfil.objects.all(),
                                           'perfil_logado': get_perfil_logado(request),'postagens':postagens})
@@ -27,6 +28,7 @@ def meu_perfil(request):
     contatos_bloqueados = perfil_logado.contatos_bloqueados.all()
     return render(request,'postagem/minha_timeline.html',{'postagens':postagens,
                                                           'contatos':contatos,'contatos_bloqueados':contatos_bloqueados})
+
 
 
 @login_required
