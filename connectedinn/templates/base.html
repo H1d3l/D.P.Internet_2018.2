@@ -6,31 +6,40 @@
 	<head>
 		<meta charset="utf-8">
 		<title>ConnectedIn</title>
-		<link rel="stylesheet" 
-			 href="{% static 'styles/bootstrap.css' %}">
-		<link rel="stylesheet" 
-			 href="{% static 'styles/main.css' %}">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-        <script src="{% static 'scripts/bootstrap-confirmation.min.js' %}"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="{% static 'styles/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+        <script src="{% static 'scripts/jquery-3.3.1.js' %}"></script>
+        <script src="{% static 'scripts/bootstrap.js' %}"></script>
+        <script src="{% static 'scripts/popper.js' %}"></script>
+
 	</head>
 	<body>
-		<div class="container">
-			<div class = "header">
-				<ul class = "nav nav-pills pull-right">
-					<li><a href = "{% url 'index' %}">{{ perfil_logado.nome }}</a></li>
-					<li><a href = "/logout/">Logout</a></li>
-                    <li><a href="{% url 'pesquisar_user'%}">Pesquisar Usuário</a> </li>
-                    <li><a href="{% url 'listaUser'%}">Listar Usuário</a> </li>
-				</ul>
-				<h3 class = "text-muted">ConnectedIn</h3>
-			</div>
-			
-			<div class="row content">
-				{% block body%}
-				{% endblock %}				
-			</div>		
-		</div>	
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href = "{% url 'index' %}">Connectedin</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href = "{% url 'meu_perfil'  %}">{{ perfil_logado.nome }}<span class="sr-only">(current)</span></a>
+              </li>
+                <form action="{% url 'pesquisar_user' %}" class="form-inline my-2 my-lg-0" method="post">
+                    {% csrf_token %}
+                  <input required name = 'nome' class="form-control mr-sm-2" type="search" placeholder="Pesquisar Usuário" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+                </form>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout/">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div class="row content">
+            {% block body%}
+			{% endblock %}
+        </div>
 	</body>
 </html>

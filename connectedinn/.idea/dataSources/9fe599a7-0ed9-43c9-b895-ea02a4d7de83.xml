@@ -643,64 +643,59 @@ to_perfil_id</ColNames>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="141" parent="20" name="title">
+    <column id="141" parent="20" name="text">
       <Position>2</Position>
-      <DataType>varchar(200)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="142" parent="20" name="text">
-      <Position>3</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="143" parent="20" name="published_date">
-      <Position>4</Position>
+    <column id="142" parent="20" name="published_date">
+      <Position>3</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <column id="144" parent="20" name="author_id">
-      <Position>5</Position>
+    <column id="143" parent="20" name="author_id">
+      <Position>4</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="145" parent="20" name="post_postagem_author_id_e6793196">
+    <index id="144" parent="20" name="post_postagem_author_id_e6793196">
       <ColNames>author_id</ColNames>
       <ColumnCollations></ColumnCollations>
     </index>
-    <key id="146" parent="20">
+    <key id="145" parent="20">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="147" parent="20">
+    <foreign-key id="146" parent="20">
       <ColNames>author_id</ColNames>
       <RefTableName>perfil_perfil</RefTableName>
       <RefColNames>id</RefColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
     </foreign-key>
-    <column id="148" parent="21" name="type">
+    <column id="147" parent="21" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="149" parent="21" name="name">
+    <column id="148" parent="21" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="150" parent="21" name="tbl_name">
+    <column id="149" parent="21" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="151" parent="21" name="rootpage">
+    <column id="150" parent="21" name="rootpage">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="152" parent="21" name="sql">
+    <column id="151" parent="21" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="153" parent="22" name="name">
+    <column id="152" parent="22" name="name">
       <Position>1</Position>
     </column>
-    <column id="154" parent="22" name="seq">
+    <column id="153" parent="22" name="seq">
       <Position>2</Position>
     </column>
   </database-model>

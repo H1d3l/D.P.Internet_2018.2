@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class = "col-lg-12">
+<div class = "col-lg-2">
 		<h2 style="margin-top: 0px">{{ perfil.nome }}</h2>
 		<address>			
 			<a href = "mailto:{{ perfil.email }}">{{ perfil.email }}</a>
@@ -15,14 +15,33 @@
         <a href="{% url 'alterar_senha' %}">
             Alterar Senha
         </a>
-        <a href="{% url 'password_reset' %}">
-            Resetar Senha
-        </a>
+        <a href="{% url 'desfazer' perfil.id%}">
+            Desfazer amizade</a>
+
+
         <a href="{% url 'bloquear' perfil.id %}">
             Bloquear
         </a>
         <a href="{% url 'desbloquear' perfil.id %}">
             Desbloquear
         </a>
-</div>		
+        <a href="{% url 'super_user' perfil.id %}">
+            Promover a super usuario
+        </a>
+</div>
+<div class="col-lg-8">
+    {% for postagem in postagens %}
+        <div class="card">
+          <div class="card-header">
+            <p>{{ postagem.title }}</p>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p>{{ postagem.text }}</p>
+              <footer class="blockquote-footer">{{ postagem.published_date }}<cite title="Source Title">{{ postagem.author }}</cite></footer>
+            </blockquote>
+          </div>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}		
