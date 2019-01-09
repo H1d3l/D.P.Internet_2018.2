@@ -8,9 +8,31 @@
           </div>
             {% if contatos %}
                 {% for contato in contatos %}
+                    {% if contato not in contatos_bloqueados %}
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item"><a href = "{% url 'exibir' contato.id %}">{{ contato.nome }}</a></li>
+                        <button type="button" class="btn btn-info btn-sm float-right " data-toggle="modal" data-target="#confirm">Bloquear</button>
+                            <div class="modal fade" id="confirm" role="dialog">
+                              <div class="modal-dialog modal-md">
+                                <div class="modal-content">
+                                  <div class="modal-body">
+                                        <p> Deseja realmente bloquear o usuario?</p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <a href="{% url 'bloquear' contato.id%}" type="button" class="btn btn-danger" id="desbloqueio">Bloquear</a>
+                                        <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                    </ul>
+                    {% else %}
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item"><a href = "{% url 'exibir' contato.id %}">{{ contato.nome }}</a></li>
                     </ul>
+                    {% endif %}
+
                 {% endfor %}
             {% else %}
                 <p>Você ainda não possui amigos</p>
@@ -41,6 +63,21 @@
                 {% for contato in contatos_bloqueados %}
                         <ul class="list-group list-group-flush">
                           <li class="list-group-item"><a href = "{% url 'exibir' contato.id %}">{{ contato.nome }}</a></li>
+                            <button type="button" class="btn btn-info btn-sm float-right " data-toggle="modal" data-target="#confirm">Desbloquear</button>
+                            <div class="modal fade" id="confirm" role="dialog">
+                              <div class="modal-dialog modal-md">
+                                <div class="modal-content">
+                                  <div class="modal-body">
+                                        <p> Deseja realmente desbloquear o usuario?</p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <a href="{% url 'desbloquear' contato.id%}" type="button" class="btn btn-danger" id="desbloqueio">Desbloquear</a>
+                                        <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
                         </ul>
                 {% endfor %}
         </div>

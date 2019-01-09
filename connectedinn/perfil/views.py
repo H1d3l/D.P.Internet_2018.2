@@ -24,7 +24,7 @@ def meu_perfil(request):
     perfil_logado = get_perfil_logado(request)
     postagens = Postagem.objects.filter(author=perfil_logado).order_by('-published_date')
     contatos = perfil_logado.contatos.all()
-    contatos_bloqueados = Perfil.objects.filter(contatos_bloqueados__in=perfil_logado.contatos_bloqueados.all())
+    contatos_bloqueados = perfil_logado.contatos_bloqueados.all()
     return render(request,'postagem/minha_timeline.html',{'postagens':postagens,
                                                           'contatos':contatos,'contatos_bloqueados':contatos_bloqueados})
 
