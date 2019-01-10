@@ -22,10 +22,18 @@ class Perfil(models.Model):
         return self.nome
 
     def pode_convidar(self,perfil_convidado):
-        pode_convidar = False
-        if perfil_convidado not in self.contatos.all():
-            pode_convidar = True
-        return pode_convidar
+        convites_recebidos = Convite.objects.filter(solicitante=perfil_convidado, convidado=self)
+        convites_enviados = Convite.objects.filter(solicitante=self, convidado=perfil_convidado)
+
+        if perfil_convidado in self.contatos.all():
+            return False
+        elif convites_enviados:
+            return False
+        elif convites_recebidos:
+            return False
+        else:
+            return True
+
 
     def convidar(self, perfil_convidado):
         if self.pode_convidar(perfil_convidado):
@@ -58,6 +66,7 @@ class Convite(models.Model):
 
     def recusar(self):
         self.delete()
+
 
 class Bloqueio(models.Model):
     perfil_bloqueador = models.ForeignKey(Perfil,on_delete=models.CASCADE,related_name='bloqueador')

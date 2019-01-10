@@ -107,11 +107,15 @@ def pesquisar_user(request):
 
 @login_required
 def resultado_pesquisa_user(request,filtro):
-    filtro1 = Perfil.objects.filter(nome=filtro)
-    filtro2 = User.objects.filter(nome=filtro)
-    return render(request,'postagem/resultado_pesquisa_user.html',{'usuarios':filtro1,
-                                                                   'perfil_logado': get_perfil_logado(request),
-                                                                   'users':filtro2})
+    perfil_logado = get_perfil_logado(request)
+    filtro = Perfil.objects.filter(nome=filtro)
+    contatos = perfil_logado.contatos.all()
+    #if(filtro.exists()):
+    return render(request,'postagem/resultado_pesquisa_user.html',{'usuarios':filtro,
+                                                                'perfil_logado': get_perfil_logado(request),
+                                                                   'contatos':contatos})
+    #else:
+     #   return HttpResponse('nao existe')
 
 def super_user(request,usuario_id):
     perfil_logado = get_perfil_logado(request)
