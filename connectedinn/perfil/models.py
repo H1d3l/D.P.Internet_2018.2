@@ -25,7 +25,12 @@ class Perfil(models.Model):
         convites_recebidos = Convite.objects.filter(solicitante=perfil_convidado, convidado=self)
         convites_enviados = Convite.objects.filter(solicitante=self, convidado=perfil_convidado)
 
+
         if perfil_convidado in self.contatos.all():
+            return False
+        elif perfil_convidado == self:
+            return False
+        elif self in perfil_convidado.contatos_bloqueados.all():
             return False
         elif convites_enviados:
             return False
@@ -44,14 +49,24 @@ class Perfil(models.Model):
     def desfazer_amizade(self,perfil_id):
         self.contatos.remove(perfil_id)
 
-    def bloquear_contato(self,perfil):
-        bloqueio = Bloqueio(perfil_bloqueador=self,perfil_bloqueado=perfil)
-        bloqueio.save()
+    def pode_bloquear(self,perfil_bloqueado):
 
-    def desbloquear_contato(self,perfil):
-        bloqueio = Bloqueio.objects.filter(perfil_bloqueador = self, perfil_bloqueado=perfil)#.all()
-        #for b in bloqueios:
-         #   b.delete()
+        if perfil_bloqueado == self:
+            return False
+        else:
+            return True
+
+
+    def bloquear_contato(self,perfil_bloqueado):
+        if self.pode_bloquear(perfil_bloqueado):
+            bloqueio = Bloqueio(perfil_bloqueador=self,perfil_bloqueado=perfil_bloqueado)
+            bloqueio.save()
+            self.desfazer_amizade(perfil_bloqueado)
+
+
+
+    def desbloquear_contato(self,perfil_bloqueado):
+        bloqueio = Bloqueio.objects.filter(perfil_bloqueador = self, perfil_bloqueado=perfil_bloqueado)
         bloqueio.delete()
 
 

@@ -16,6 +16,19 @@
                         <p class="card-text">{{ usuario.email }}</p>
                       </div>
                     </div>
+                {% elif perfil_logado in usuario.contatos_bloqueados.all %}
+                    <div class="card">
+                      <div class="card-header">
+                          Usuário não encontrado :-(
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <p class="card-text"></p>
+                        <p class="card-text"></p>
+
+                      </div>
+                    </div>
+
                 {% else %}
                     <div class="card">
                       <div class="card-header">
