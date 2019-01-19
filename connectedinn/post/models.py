@@ -10,8 +10,6 @@ class Postagem(models.Model):
     text = models.TextField(null=False)
     published_date = models.DateTimeField(blank=True,null=True,default=timezone.now)
 
-    def __str__(self):
-        return self.title
 
 
     def excluir_postagem(self):

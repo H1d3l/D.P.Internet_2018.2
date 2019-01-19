@@ -26,7 +26,7 @@ def meu_perfil(request):
     postagens = Postagem.objects.filter(author=perfil_logado).order_by('-published_date')
     contatos = perfil_logado.contatos.all()
     contatos_bloqueados = perfil_logado.contatos_bloqueados.all()
-    return render(request,'postagem/minha_timeline.html',{'postagens':postagens,
+    return render(request, 'minha_timeline.html', {'postagens':postagens,
                                                           'contatos':contatos,'contatos_bloqueados':contatos_bloqueados})
 
 
@@ -110,7 +110,7 @@ def resultado_pesquisa_user(request,filtro):
     perfil_logado = get_perfil_logado(request)
     filtro = Perfil.objects.filter(nome=filtro)
     contatos = perfil_logado.contatos.all()
-    return render(request,'postagem/resultado_pesquisa_user.html',{'usuarios':filtro,
+    return render(request, 'resultado_pesquisa_user.html', {'usuarios':filtro,
                                                                 'perfil_logado': get_perfil_logado(request),
                                                                    'contatos':contatos})
 
@@ -123,5 +123,24 @@ def super_user(request,usuario_id):
     else:
         return HttpResponse("Você não é um super usuario")
     return redirect('index')
+
+
+def justificativa(request):
+    form = JustificativaDesativarContaForm(request.POST)
+    perfil_logado = get_perfil_logado(request)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            perfil_logado.desativar_perfil()
+            model_instance = form.save(commit=False)
+            model_instance.perfil = request.user.perfil
+            model_instance.save()
+            perfil_logado.save()
+            return redirect('login')
+    else:
+        form = JustificativaDesativarContaForm()
+    return render(request, 'desabilitarconta.html',{'form':form})
+
+
 
 

@@ -28,6 +28,7 @@ urlpatterns = [
     path('perfil/<int:perfil_id>/desbloquear',perfilview.desbloquear,name = 'desbloquear'),
     path('perfil/<int:perfil_id>', perfilview.exibir_perfil, name='exibir'),
     path('perfil/minha_timeline',perfilview.meu_perfil,name = 'meu_perfil'),
+    path('perfil/minha_timeline/justificativa',perfilview.justificativa,name='desativar'),
     path('perfil/<int:perfil_id>/convidar',perfilview.convidar, name='convidar'),
     path('convite/<int:convite_id>/aceitar',perfilview.aceitar, name='aceitar'),
     path('convite/<int:convite_id>/recusar', perfilview.recusar, name='recusar'),

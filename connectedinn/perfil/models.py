@@ -13,6 +13,7 @@ class Perfil(models.Model):
     contatos = models.ManyToManyField('self')
     usuario = models.OneToOneField(User,related_name="perfil",on_delete=models.CASCADE)
     contatos_bloqueados = models.ManyToManyField('self',related_name='meus_contatos_bloqueados', symmetrical=False, through="Bloqueio")
+    ativo = models.BooleanField(default=True)
 
     @property
     def email(self):
@@ -70,6 +71,13 @@ class Perfil(models.Model):
         bloqueio.delete()
 
 
+    def ativar_perfil(self):
+        self.ativo = True
+
+    def desativar_perfil(self):
+        self.ativo = False
+
+
 class Convite(models.Model):
     solicitante = models.ForeignKey(Perfil,on_delete=models.CASCADE,related_name='convites_feitos' )
     convidado = models.ForeignKey(Perfil, on_delete= models.CASCADE, related_name='convites_recebidos')
@@ -89,3 +97,6 @@ class Bloqueio(models.Model):
 
 
 
+class Justificativa(models.Model):
+    perfil = models.ForeignKey(Perfil,on_delete=models.CASCADE)
+    justificativa = models.TextField()
