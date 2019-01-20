@@ -14,21 +14,26 @@ from django.db.models import Q
 # Create your views here.
 @login_required
 def index(request):
-    perfil_logado = get_perfil_logado(request)
-    perfis_bloqueados = perfil_logado.contatos_bloqueados.all()
-    postagens = Postagem.objects.exclude(author_id__in=perfis_bloqueados).filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all()))\
-        .order_by('-published_date')
-    return render(request, 'index.html', {'perfis': Perfil.objects.all(),
-                                          'perfil_logado': get_perfil_logado(request),'postagens':postagens})
-
+    if request.user.perfil.ativo == True:
+        perfil_logado = get_perfil_logado(request)
+        perfis_bloqueados = perfil_logado.contatos_bloqueados.all()
+        postagens = Postagem.objects.filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all()))\
+            .order_by('-published_date')
+        return render(request, 'index.html', {'perfis': Perfil.objects.all(),
+                                              'perfil_logado': get_perfil_logado(request),'postagens':postagens})
+    else:
+        return render(request,'ativar_perfil.html')
+@login_required
 def meu_perfil(request):
     perfil_logado = get_perfil_logado(request)
-    postagens = Postagem.objects.filter(author=perfil_logado).order_by('-published_date')
-    contatos = perfil_logado.contatos.all()
-    contatos_bloqueados = perfil_logado.contatos_bloqueados.all()
-    return render(request, 'minha_timeline.html', {'postagens':postagens,
-                                                          'contatos':contatos,'contatos_bloqueados':contatos_bloqueados})
-
+    if perfil_logado.ativo == True:
+        postagens = Postagem.objects.filter(author=perfil_logado).order_by('-published_date')
+        contatos = perfil_logado.contatos.all()
+        contatos_bloqueados = perfil_logado.contatos_bloqueados.all()
+        return render(request, 'minha_timeline.html', {'postagens':postagens,
+                                                              'contatos':contatos,'contatos_bloqueados':contatos_bloqueados})
+    else:
+        return HttpResponse("nao")
 
 
 @login_required
@@ -67,12 +72,14 @@ def desfazer_amizade(request,perfil_id):
     perfil_logado.desfazer_amizade(amigo)
     return redirect('index')
 
+@login_required
 def bloquear(request,perfil_id):
     amigo = Perfil.objects.get(id = perfil_id)
     perfil_logado = get_perfil_logado(request)
     perfil_logado.bloquear_contato(amigo)
     return redirect('meu_perfil')
 
+@login_required
 def desbloquear(request,perfil_id):
     amigo = Perfil.objects.get(id=perfil_id)
     perfil_logado = get_perfil_logado(request)
@@ -113,7 +120,7 @@ def resultado_pesquisa_user(request,filtro):
     return render(request, 'resultado_pesquisa_user.html', {'usuarios':filtro,
                                                                 'perfil_logado': get_perfil_logado(request),
                                                                    'contatos':contatos})
-
+@login_required
 def super_user(request,usuario_id):
     perfil_logado = get_perfil_logado(request)
     if (perfil_logado.usuario.is_superuser):
@@ -124,8 +131,8 @@ def super_user(request,usuario_id):
         return HttpResponse("Você não é um super usuario")
     return redirect('index')
 
-
-def justificativa(request):
+@login_required
+def desativar_perfil(request):
     form = JustificativaDesativarContaForm(request.POST)
     perfil_logado = get_perfil_logado(request)
 
@@ -144,3 +151,8 @@ def justificativa(request):
 
 
 
+def ativar_perfil(request):
+    perfil = get_perfil_logado(request)
+    perfil.ativar_perfil()
+    perfil.save()
+    return redirect("login")

@@ -8,19 +8,15 @@
       <change beforePath="$PROJECT_DIR$/../Bank/accounts/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Bank/accounts/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Bank/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Bank/accounts/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Bank/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../Bank/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2a60a302-9011-4822-bc0c-34b2ffa06ec5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/2a60a302-9011-4822-bc0c-34b2ffa06ec5.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/connectedinn/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/connectedinn/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/perfil/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/perfil/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/perfil/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/perfil/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/perfil/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/perfil/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/post/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/post/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/postagem/criar_post.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/criar_post.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/postagem/lista_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lista_user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/postagem/minha_timeline.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/minha_timeline.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/postagem/pesquisa_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pesquisa_user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/postagem/resultado_pesquisa_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/resultado_pesquisa_user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/minha_timeline.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/minha_timeline.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/resultado_pesquisa_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/resultado_pesquisa_user.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gamesapi-por fazer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gamesapi-por fazer/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,14 +60,56 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/connectedinn/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-128">
-              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="390">
+              <caret line="31" column="70" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
               <folding>
                 <element signature="e#636#668#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/perfil/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="19" column="114" selection-start-line="19" selection-start-column="114" selection-end-line="19" selection-end-column="114" />
+              <folding>
+                <element signature="e#0#57#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/resultado_pesquisa_user.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="690">
+              <caret line="46" column="26" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/perfil/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="68" column="25" selection-start-line="68" selection-start-column="25" selection-end-line="68" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/minha_timeline.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="246">
+              <caret line="34" column="116" selection-start-line="34" selection-start-column="116" selection-end-line="34" selection-end-column="116" />
             </state>
           </provider>
         </entry>
@@ -121,20 +159,22 @@
         <option value="$PROJECT_DIR$/templates/postagem/lista_user.html" />
         <option value="$PROJECT_DIR$/post/forms.py" />
         <option value="$PROJECT_DIR$/post/views.py" />
-        <option value="$PROJECT_DIR$/templates/login.html" />
         <option value="$PROJECT_DIR$/templates/postagem/index_postagem.html" />
         <option value="$PROJECT_DIR$/templates/perfil.html" />
-        <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/templates/postagem/resultado_pesquisa_user.html" />
         <option value="$PROJECT_DIR$/templates/postagem/minha_timeline.html" />
-        <option value="$PROJECT_DIR$/templates/minha_timeline.html" />
         <option value="$PROJECT_DIR$/post/models.py" />
-        <option value="$PROJECT_DIR$/connectedinn/urls.py" />
         <option value="$PROJECT_DIR$/templates/desabilitarconta.html" />
         <option value="$PROJECT_DIR$/perfil/forms.py" />
+        <option value="$PROJECT_DIR$/templates/login.html" />
+        <option value="$PROJECT_DIR$/templates/ativar_perfil.html" />
+        <option value="$PROJECT_DIR$/connectedinn/urls.py" />
         <option value="$PROJECT_DIR$/perfil/models.py" />
         <option value="$PROJECT_DIR$/perfil/views.py" />
+        <option value="$PROJECT_DIR$/templates/resultado_pesquisa_user.html" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/templates/minha_timeline.html" />
       </list>
     </option>
   </component>
@@ -150,7 +190,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -167,6 +206,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -264,18 +304,19 @@
       <workItem from="1547550312660" duration="415000" />
       <workItem from="1547761670301" duration="3971000" />
       <workItem from="1547813338684" duration="2714000" />
-      <workItem from="1547900865906" duration="7713000" />
+      <workItem from="1547900865906" duration="7937000" />
+      <workItem from="1547909544349" duration="9407000" />
+      <workItem from="1547987859568" duration="495000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="207074000" />
+    <option name="totallyTimeSpent" value="217200000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1366" height="732" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="-1" width="1366" height="733" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22348484" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23106061" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -289,14 +330,14 @@
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49848485" visible="true" weight="0.35234898" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49848485" visible="true" weight="0.3420622" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50151515" side_tool="true" weight="0.35402685" />
       <window_info anchor="bottom" id="Python Console" order="13" weight="0.32718122" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.32954547" />
-      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.2469697" />
+      <window_info anchor="right" id="Database" order="4" weight="0.2469697" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,13 +410,6 @@
     <entry file="das://adcead0e-e26c-4d51-aff1-4db96437c17b/schema/main/table/auth_user" />
     <entry file="das://adcead0e-e26c-4d51-aff1-4db96437c17b/schema/main/table/perfil_perfil" />
     <entry file="das://adcead0e-e26c-4d51-aff1-4db96437c17b/schema/main/table/perfil_perfil_contatos" />
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://adcead0e-e26c-4d51-aff1-4db96437c17b/schema/main/table/perfil_convite" />
     <entry file="das://9fe599a7-0ed9-43c9-b895-ea02a4d7de83/schema/main/table/perfil_convite" />
     <entry file="das://2a60a302-9011-4822-bc0c-34b2ffa06ec5/schema/main/table/perfil_perfil_contatos">
@@ -419,13 +453,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="27" column="103" selection-start-line="27" selection-start-column="103" selection-end-line="27" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/post/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -440,45 +467,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="12" column="80" lean-forward="true" selection-start-line="12" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/resultado_pesquisa_user.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-234">
-          <caret line="24" column="52" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/tela_de_registro.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="27" column="38" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://2a60a302-9011-4822-bc0c-34b2ffa06ec5/schema/main/table/perfil_justificativa">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://2a60a302-9011-4822-bc0c-34b2ffa06ec5/schema/main/table/perfil_perfil">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/desabilitarconta.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
@@ -492,37 +484,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/perfil/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="138" column="36" lean-forward="true" selection-start-line="138" selection-start-column="36" selection-end-line="138" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/perfil.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/minha_timeline.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="67" column="38" selection-start-line="67" selection-start-column="38" selection-end-line="67" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/perfil/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="79" selection-start-line="79" selection-end-line="79" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -536,13 +501,103 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../venv/lib/python3.6/site-packages/django/contrib/auth/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://2a60a302-9011-4822-bc0c-34b2ffa06ec5/schema/main/table/perfil_perfil">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://2a60a302-9011-4822-bc0c-34b2ffa06ec5/schema/main/table/perfil_justificativa">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ativar_perfil.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/desabilitarconta.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/connectedinn/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-128">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="390">
+          <caret line="31" column="70" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
           <folding>
             <element signature="e#636#668#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/perfil/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="19" column="114" selection-start-line="19" selection-start-column="114" selection-end-line="19" selection-end-column="114" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/resultado_pesquisa_user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="46" column="26" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-60">
+          <caret line="71" column="48" selection-start-line="71" selection-start-column="48" selection-end-line="71" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/perfil/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="68" column="25" selection-start-line="68" selection-start-column="25" selection-end-line="68" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/minha_timeline.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="34" column="116" selection-start-line="34" selection-start-column="116" selection-end-line="34" selection-end-column="116" />
         </state>
       </provider>
     </entry>

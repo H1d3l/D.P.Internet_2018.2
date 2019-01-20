@@ -14,6 +14,11 @@
                         <h5 class="card-title">{{ usuario.nome }}</h5>
                         <p class="card-text">{{ usuario.nome_empresa }}</p>
                         <p class="card-text">{{ usuario.email }}</p>
+                          {% if usuario.ativo == True %}
+                              <p>Perfil Ativo</p>
+                          {% else %}
+                              <p>Perfil desativado</p>
+                          {% endif %}
                       </div>
                     </div>
                 {% elif perfil_logado in usuario.contatos_bloqueados.all %}
@@ -39,6 +44,11 @@
                         <h5 class="card-title">{{ usuario.nome }}</h5>
                         <p class="card-text">{{ usuario.nome_empresa }}</p>
                         <p class="card-text">{{ usuario.email }}</p>
+                          {% if usuario.ativo == True %}
+                              <p>Perfil Ativo</p>
+                          {% else %}
+                              <p>Perfil desativado</p>
+                          {% endif %}
                         <a href = "{% url 'convidar' usuario.id %}" class="btn btn-primary">Convidar</a>
 
                       </div>

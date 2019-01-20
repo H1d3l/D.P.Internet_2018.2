@@ -12,7 +12,9 @@
                 {% for contato in contatos %}
                     {% if contato not in contatos_bloqueados %}
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item"><a href = "{% url 'exibir' contato.id %}">{{ contato.nome }}</a></li>
+                    {% if contato.ativo == False %}
+                      <li class="list-group-item"><a href = "{% url 'exibir' contato.id %}">{{ contato.nome }}||Perfil Desativado</a></li>
+
                         <button type="button" class="btn btn-info btn-sm float-right " data-toggle="modal" data-target="#confirm">Bloquear</button>
                             <div class="modal fade" id="confirm" role="dialog">
                               <div class="modal-dialog modal-md">
@@ -29,6 +31,26 @@
                               </div>
                             </div>
                     </ul>
+                        {% else %}
+                            <li class="list-group-item"><a href = "{% url 'exibir' contato.id %}">{{ contato.nome }}</a></li>
+
+                            <button type="button" class="btn btn-info btn-sm float-right " data-toggle="modal" data-target="#confirm">Bloquear</button>
+                                <div class="modal fade" id="confirm" role="dialog">
+                                  <div class="modal-dialog modal-md">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                            <p> Deseja realmente bloquear o usuario?</p>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <a href="{% url 'bloquear' contato.id%}" type="button" class="btn btn-danger" id="bloqueio">Bloquear</a>
+                                            <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+
+                        {% endif %}
                     {% else %}
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item"><a href = "{% url 'exibir' contato.id %}">{{ contato.nome }}</a></li>

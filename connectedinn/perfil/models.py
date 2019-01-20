@@ -64,8 +64,6 @@ class Perfil(models.Model):
             bloqueio.save()
             self.desfazer_amizade(perfil_bloqueado)
 
-
-
     def desbloquear_contato(self,perfil_bloqueado):
         bloqueio = Bloqueio.objects.filter(perfil_bloqueador = self, perfil_bloqueado=perfil_bloqueado)
         bloqueio.delete()

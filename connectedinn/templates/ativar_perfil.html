@@ -1,0 +1,32 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<!doctype html>
+<html lang = "pt-br">
+	<head>
+		<meta charset="utf-8">
+		<title>ConnectedIn</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="{% static 'styles/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+        <script src="{% static 'scripts/jquery-3.3.1.js' %}"></script>
+        <script src="{% static 'scripts/bootstrap.js' %}"></script>
+        <script src="{% static 'scripts/popper.js' %}"></script>
+
+	</head>
+	<body>
+
+        <div class="col-lg-8">
+            <div class="card">
+              <h5 class="card-header">Conta Desativada!!!</h5>
+              <div class="card-body">
+                <h5 class="card-title">Esta conta foi desativada pelo usuário</h5>
+                <p class="card-text">Você deseja reativar?</p>
+                      <a href="{% url "ativar" %}" class="btn btn-primary">Ativar</a>
+              </div>
+            </div>
+        </div>
+
+
+	</body>
+</html>
