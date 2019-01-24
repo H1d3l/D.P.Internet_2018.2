@@ -2,8 +2,9 @@
 
 /* Space out content a bit */
 body {
-  padding-top: 20px;
+  padding-top: 0px;
   padding-bottom: 20px;
+    background-color: #eeeeee;
 }
 
 .header,
@@ -71,4 +72,7 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+.convites-recebidos  ul li{
+    display: inline;
 }
