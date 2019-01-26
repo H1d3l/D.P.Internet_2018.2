@@ -1,47 +1,126 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class = "col-lg-2">
-		<h2 style="margin-top: 0px">{{ perfil.nome }}</h2>
-		<address>			
-			<a href = "mailto:{{ perfil.email }}">{{ perfil.email }}</a>
-			<br>
-			<strong>{{ perfil.nome_empresa }}</strong>
-		
-		</address>
+    <div class="col-lg-4">
+        <div class="card w-75">
+            <div class="card-body">
+                <h2 class="card-title">{{ perfil.nome }}</h2>
+                <p class="card-text">
+                <address>
+                    Email: <a href="mailto:{{ perfil.email }}">{{ perfil.email }}</a>
+                    <br>
+                    Empresa: <strong>{{ perfil.nome_empresa }}</strong>
+                </address>
 
-		<a href = "{% url 'convidar' perfil.id %}">
-			Convidar
-		</a>
-        <a href="{% url 'alterar_senha' %}">
-            Alterar Senha
-        </a>
-        <a href="{% url 'desfazer' perfil.id%}">
-            Desfazer amizade</a>
+                </p>
+                {% if perfil in perfil_logado.contatos.all %}
+                    <a href="{% url 'desfazer' perfil.id %}">Desfazer amizade</a>
+                {% else %}
+                    <a href="{% url 'convidar' perfil.id %}">Enviar solicitação de amizade</a>
+                {% endif %}
+                {% if perfil in perfil_logado.contatos_bloqueados.all %}
+                    <a href="{% url 'desbloquear' perfil.id %}">Desbloquear usuário</a>
+                {% else %}
+                    <a href="{% url 'bloquear' perfil.id %}">Bloquear</a>
+                {% endif %}
+            </div>
+        </div>
 
 
-        <a href="{% url 'bloquear' perfil.id %}">
-            Bloquear
-        </a>
-        <a href="{% url 'desbloquear' perfil.id %}">
-            Desbloquear
-        </a>
+
         <a href="{% url 'super_user' perfil.id %}">
             Promover a super usuario
         </a>
-</div>
-<div class="col-lg-8">
-    {% for postagem in postagens %}
-        <div class="card">
-          <div class="card-header">
-            <p>{{ postagem.title }}</p>
-          </div>
-          <div class="card-body">
-            <blockquote class="blockquote mb-0">
-              <p>{{ postagem.text }}</p>
-              <footer class="blockquote-footer">{{ postagem.published_date }}<cite title="Source Title">{{ postagem.author }}</cite></footer>
-            </blockquote>
-          </div>
-        </div>
-    {% endfor %}
-</div>
+    </div>
+    <div class=" col-lg-6 timeline">
+        {% if perfil_logado.usuario.is_superuser %}
+            {% for postagem in postagens %}
+                <div class="card">
+                    <div class="card-header">
+                        <p>{{ postagem.title }}</p>
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p>{{ postagem.text }}</p>
+                            <footer class="blockquote-footer">{{ postagem.published_date }}<cite
+                                    title="Source Title">{{ postagem.author }}</cite></footer>
+                        </blockquote>
+                        <button type="button" class="btn btn-info btn-sm float-right " data-toggle="modal"
+                                data-target="#confirm">Excluir
+                        </button>
+                        <div class="modal fade" id="confirm" role="dialog">
+                            <div class="modal-dialog modal-md">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <p> Deseja realmente excluir a postagem?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{% url 'excluir_postagem' postagem.id %}" type="button"
+                                           class="btn btn-danger" id="delete">Excluir</a>
+                                        <button type="button" data-dismiss="modal" class="btn btn-default">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        {% else %}
+            {% for postagem in postagens %}
+                {% if postagem.author_id == perfil_logado.id %}
+                    <div class="card">
+                        <div class="card-header">
+                            <p>{{ postagem.title }}</p>
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p>{{ postagem.text }}</p>
+                                <footer class="blockquote-footer">{{ postagem.published_date }}<cite
+                                        title="Source Title">{{ postagem.author }}</cite></footer>
+                            </blockquote>
+                            <button type="button" class="btn btn-info btn-sm float-right " data-toggle="modal"
+                                    data-target="#confirm">Excluir
+                            </button>
+                            <div class="modal fade" id="confirm" role="dialog">
+                                <div class="modal-dialog modal-md">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <p> Deseja realmente excluir a postagem?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="{% url 'excluir_postagem' postagem.id %}" type="button"
+                                               class="btn btn-danger" id="delete">Excluir</a>
+                                            <button type="button" data-dismiss="modal" class="btn btn-default">
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                {% else %}
+                    <div class="card">
+                        <div class="card-header">
+                            <p>{{ postagem.title }}</p>
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p>{{ postagem.text }}</p>
+                                <footer class="blockquote-footer">{{ postagem.published_date }}<cite
+                                        title="Source Title">{{ postagem.author }}</cite></footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}		

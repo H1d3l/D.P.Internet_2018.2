@@ -73,6 +73,9 @@ body {
     border-bottom: 0;
   }
 }
-.convites-recebidos  ul li{
-    display: inline;
+.convites-enviados li{
+    display: block;
+}
+.convites-recebidos ul li{
+  display: inline-block;
 }

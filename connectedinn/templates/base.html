@@ -2,20 +2,23 @@
 {% load i18n %}
 
 <!doctype html>
-<html lang = "pt-br">
-	<head>
-		<meta charset="utf-8">
-		<title>ConnectedIn</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="{% static 'styles/css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/main.css' %}">
-        <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1" crossorigin="anonymous"></script>
-        <script src="{% static 'scripts/jquery-3.3.1.js' %}"></script>
-        <script src="{% static 'scripts/bootstrap.js' %}"></script>
-        <script src="{% static 'scripts/popper.js' %}"></script>
-	</head>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>ConnectedIn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'styles/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js"
+            integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
+            crossorigin="anonymous"></script>
+    <script src="{% static 'scripts/jquery-3.3.1.js' %}"></script>
+    <script src="{% static 'scripts/bootstrap.js' %}"></script>
+    <script src="{% static 'scripts/popper.js' %}"></script>
+</head>
 
-	<body>
+<body>
+<!--
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <a class="navbar-brand" href = "{% url 'index' %}">Connectedin</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,20 +30,56 @@
               <li class="nav-item active">
                 <a class="nav-link" href = "{% url 'meu_perfil'  %}">{{ perfil_logado.nome }}<span class="sr-only">(current)</span></a>
               </li>
-                <form action="{% url 'pesquisar_user' %}" class="form-inline my-2 my-lg-0" method="post">
+                <form action="{% url 'pesquisar_user' %}" class="form-inline my-10 my-lg-0 ml-lg-5" method="post">
                     {% csrf_token %}
-                  <input required name = 'nome' class="form-control mr-sm-2" type="search" placeholder="Pesquisar Usuário" aria-label="Search">
+                  <input required name = 'nome' class="form-control mr-sm-2 " type="search" placeholder="Pesquisar Usuário" aria-label="Search">
                   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
                 </form>
-              <li class="nav-item">
+              <li class="nav-item ml-lg-5" >
                 <a class="nav-link " href="/logout/">Logout</a>
               </li>
             </ul>
           </div>
-        </nav>
-        <div class="row content">
-            {% block body%}
-			{% endblock %}
+        </nav>-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href = "{% url 'index' %}">Connectedin</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href = "{% url 'meu_perfil'  %}">{{ perfil_logado.nome }}<span class="sr-only">(current)</span></a>
+            </li>
+
+            <form action="{% url 'pesquisar_user' %}" class="form-inline my-10 my-lg-0 ml-lg-5" method="post">
+                {% csrf_token %}
+              <input required name = 'nome' class="form-control mr-sm-2 " type="search" placeholder="Pesquisar Usuário" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+            </form>
+
+        </ul>
+        <div class="nav-item dropdown dropleft">
+                <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog"></i></a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                    <a class="dropdown-item" href="{% url "desativar" %}">Desativar Conta</a>
+                    <a class="dropdown-item" href="{% url 'alterar_senha' %}">Alterar Senha</a>
+
+                </div>
         </div>
-	</body>
+        <a class="nav-link " href="/logout/"><i class="fas fa-sign-out-alt"></i></a>
+
+
+
+    </div>
+</nav>
+<div class="row content">
+    {% block body %}
+    {% endblock %}
+</div>
+</body>
 </html>

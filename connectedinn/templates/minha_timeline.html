@@ -4,136 +4,172 @@
 
     <div class="col-lg-2">
         <div class="meus_contatos">
-            <div class="card text-center" >
-              <div class="card-header">
-                Meus contatos
-              </div>
-            {% if contatos %}
-                {% for contato in contatos %}
-                    {% if contato not in contatos_bloqueados %}
-                    <ul class="list-group list-group-flush">
-                    {% if contato.ativo == False %}
-                      <li class="list-group-item"><a href = "{% url 'exibir' contato.id %}">{{ contato.nome }}||Perfil Desativado</a></li>
+            <div class="card text-center">
+                <div class="card-header">
+                    Meus contatos
+                </div>
+                {% if contatos %}
+                    {% for contato in contatos %}
+                        {% if contato not in contatos_bloqueados %}
+                            <ul class="list-group list-group-flush">
+                                {% if contato.ativo == False %}
+                                    <li class="list-group-item"><a
+                                            href="{% url 'exibir' contato.id %}">{{ contato.nome }}||Perfil
+                                        Desativado</a></li>
 
-                        <button type="button" class="btn btn-info btn-sm float-right " data-toggle="modal" data-target="#confirm">Bloquear</button>
-                            <div class="modal fade" id="confirm" role="dialog">
-                              <div class="modal-dialog modal-md">
-                                <div class="modal-content">
-                                  <div class="modal-body">
-                                        <p> Deseja realmente bloquear o usuario?</p>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <a href="{% url 'bloquear' contato.id%}" type="button" class="btn btn-danger" id="bloqueio">Bloquear</a>
-                                        <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
-                                  </div>
-                                </div>
+                                    <button type="button" class="btn btn-info btn-sm float-right " data-toggle="modal"
+                                            data-target="#confirm">Bloquear
+                                    </button>
+                                    <div class="modal fade" id="confirm" role="dialog">
+                                        <div class="modal-dialog modal-md">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <p> Deseja realmente bloquear o usuario?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="{% url 'bloquear' contato.id %}" type="button"
+                                                       class="btn btn-danger" id="bloqueio">Bloquear</a>
+                                                    <button type="button" data-dismiss="modal" class="btn btn-default">
+                                                        Cancelar
+                                                    </button>
+                                                </div>
+                                            </div>
 
-                              </div>
-                            </div>
-                    </ul>
-                        {% else %}
-                            <li class="list-group-item"><a href = "{% url 'exibir' contato.id %}">{{ contato.nome }}</a></li>
+                                        </div>
+                                    </div>
+                                    </ul>
+                                {% else %}
+                                    <li class="list-group-item"><a
+                                            href="{% url 'exibir' contato.id %}">{{ contato.nome }}</a></li>
 
-                            <button type="button" class="btn btn-info btn-sm float-right " data-toggle="modal" data-target="#confirm">Bloquear</button>
-                                <div class="modal fade" id="confirm" role="dialog">
-                                  <div class="modal-dialog modal-md">
-                                    <div class="modal-content">
-                                      <div class="modal-body">
-                                            <p> Deseja realmente bloquear o usuario?</p>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <a href="{% url 'bloquear' contato.id%}" type="button" class="btn btn-danger" id="bloqueio">Bloquear</a>
-                                            <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
-                                      </div>
+                                    <button type="button" class="btn btn-info btn-sm float-right " data-toggle="modal"
+                                            data-target="#confirm">Bloquear
+                                    </button>
+                                    <div class="modal fade" id="confirm" role="dialog">
+                                        <div class="modal-dialog modal-md">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <p> Deseja realmente bloquear o usuario?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="{% url 'bloquear' contato.id %}" type="button"
+                                                       class="btn btn-danger" id="bloqueio">Bloquear</a>
+                                                    <button type="button" data-dismiss="modal" class="btn btn-default">
+                                                        Cancelar
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
 
-                                  </div>
-                                </div>
-
+                                {% endif %}
+                        {% else %}
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a
+                                        href="{% url 'exibir' contato.id %}">{{ contato.nome }}</a></li>
+                            </ul>
                         {% endif %}
-                    {% else %}
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item"><a href = "{% url 'exibir' contato.id %}">{{ contato.nome }}</a></li>
-                    </ul>
-                    {% endif %}
 
-                {% endfor %}
-            {% else %}
-                <p>Você ainda não possui amigos</p>
-            {% endif %}
-        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Você ainda não possui amigos</p>
+                {% endif %}
+            </div>
         </div>
 
     </div>
 
     <div class="col-lg-5">
-    <div class="postagens">
-        {% for postagem in postagens %}
-            <div class="card">
-              <div class="card-header">
-                <p>{{ postagem.title }}</p>
-              </div>
-              <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                  <p>{{ postagem.text }}</p>
-                  <footer class="blockquote-footer">{{ postagem.published_date }}<cite title="Source Title">{{ postagem.author }}</cite></footer>
-                </blockquote>
-              </div>
-            </div>
-        {% endfor %}
+        <div class="postagens">
+            {% for postagem in postagens %}
+                <div class="card">
+                    <div class="card-header">
+                        <p>{{ postagem.title }}</p>
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p>{{ postagem.text }}</p>
+                            <footer class="blockquote-footer">{{ postagem.published_date }}<cite
+                                    title="Source Title">{{ postagem.author }}</cite></footer>
+                        </blockquote>
+                        <button type="button" class="btn btn-info btn-sm float-right " data-toggle="modal"
+                                data-target="#confirm"><i class="fas fa-trash-alt"></i>
+                        </button>
+                        <div class="modal fade" id="confirm" role="dialog">
+                            <div class="modal-dialog modal-md">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <p> Deseja realmente excluir a postagem?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{% url 'excluir_postagem' postagem.id %}" type="button"
+                                           class="btn btn-danger" id="delete">Excluir</a>
+                                        <button type="button" data-dismiss="modal" class="btn btn-default">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
 
-    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
 
-    </div>
-    <div class="col-lg-2">
-        <div class="status-perfil">
-            <a href="{% url "desativar" %}">Desabilitar Conta</a>
         </div>
 
     </div>
+
     <div class="col-lg-2">
         <div class="contatos_bloqueados">
-            <div class="card text-center" >
-              <div class="card-header">
-                Perfis bloqueados
-              </div>
-              {% if contatos_bloqueados %}
-                  {% for contato in contatos_bloqueados %}
-                      <ul class="list-group list-group-flush">
-                          <li class="list-group-item"><a href = "{% url 'exibir' contato.id %}">{{ contato.nome }}</a></li>
+            <div class="card text-center">
+                <div class="card-header">
+                    Perfis bloqueados
+                </div>
+                {% if contatos_bloqueados %}
+                    {% for contato in contatos_bloqueados %}
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="{% url 'exibir' contato.id %}">{{ contato.nome }}</a>
+                            </li>
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
-                              Desbloquear
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                Desbloquear
                             </button>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Desbloquear?</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                      Deseja realmente desbloquear {{ contato }}?
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
-                                    <a href="{% url 'desbloquear' contato.id%}" type="button" class="btn btn-primary" id="desbloqueio">Desbloquear</a>
-                                  </div>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Desbloquear?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Deseja realmente desbloquear {{ contato }}?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary " data-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <a href="{% url 'desbloquear' contato.id %}" type="button"
+                                               class="btn btn-primary" id="desbloqueio">Desbloquear</a>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
                             </div>
 
                         </ul>
-                  {% endfor %}
+                    {% endfor %}
                 {% else %}
                     <div class="card text-center ">
-                      <div class="card-body">
-                        <p class="card-text">Não há contatos bloqueados</p>
-                      </div>
+                        <div class="card-body">
+                            <p class="card-text">Não há contatos bloqueados</p>
+                        </div>
                     </div>
                 {% endif %}
 

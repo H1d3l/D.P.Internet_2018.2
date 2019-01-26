@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
-
+{% if perfil_logado.usuario.is_superuser %}
     <div class="col-lg-2">
         <div class="perfis_index">
             <div class="card text-center">
@@ -21,18 +21,63 @@
         </div>
 
     </div>
-    <div class="col-lg-6">
-        <div class="campo_de_postagem">
-            <form action="{% url 'criar_post' %}" method="post">
-                {% csrf_token %}
-                <div class="form-group">
+{% else %}
+    <div class="col-lg-2">
+
+    </div>
+
+{% endif %}
+
+
+<div class="col-lg-6">
+    <div class="campo_de_postagem">
+        <form action="{% url 'criar_post' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
                     <textarea required placeholder="No que você está pensando?" class="form-control" name="text"
                               rows="3"></textarea>
-                    <button type="submit" class="btn btn-link">Compartilhar</button>
+                <button type="submit" class="btn btn-link">Compartilhar</button>
+            </div>
+        </form>
+    </div>
+    <div class="timeline">
+        {% if perfil_logado.usuario.is_superuser %}
+            {% for postagem in postagens %}
+                <div class="card">
+                    <div class="card-header">
+                        <p>{{ postagem.title }}</p>
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p>{{ postagem.text }}</p>
+                            <footer class="blockquote-footer">{{ postagem.published_date }}<cite
+                                    title="Source Title">{{ postagem.author }}</cite></footer>
+                        </blockquote>
+                        <button type="button" class="btn btn-info btn-sm float-right " data-toggle="modal"
+                                data-target="#confirm">Excluir
+                        </button>
+                        <div class="modal fade" id="confirm" role="dialog">
+                            <div class="modal-dialog modal-md">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <p> Deseja realmente excluir a postagem?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{% url 'excluir_postagem' postagem.id %}" type="button"
+                                           class="btn btn-danger" id="delete">Excluir</a>
+                                        <button type="button" data-dismiss="modal" class="btn btn-default">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </div>
-        <div class="timeline">
+            {% endfor %}
+
+        {% else %}
             {% for postagem in postagens %}
                 {% if postagem.author_id == perfil_logado.id %}
                     <div class="card">
@@ -44,7 +89,6 @@
                                 <p>{{ postagem.text }}</p>
                                 <footer class="blockquote-footer">{{ postagem.published_date }}<cite
                                         title="Source Title">{{ postagem.author }}</cite></footer>
-
                             </blockquote>
                             <button type="button" class="btn btn-info btn-sm float-right " data-toggle="modal"
                                     data-target="#confirm">Excluir
@@ -86,63 +130,62 @@
                 {% endif %}
 
             {% endfor %}
-
-        </div>
-
+    {% endif %}
     </div>
-    <div class="col-lg-4">
-        <div class="convites-recebidos card text-center w-auto">
-            {% with total=perfil_logado.convites_recebidos.count %}
-                {% if total %}
+</div>
+
+<div class="col-lg-4">
+    <div class="convites-recebidos card text-center w-auto">
+        {% with total=perfil_logado.convites_recebidos.count %}
+            {% if total %}
+                <div class="card-body">
+                    <h6 class="card-title">Responder a{{ total|pluralize }} Solicitação{{ total|pluralize }} de
+                        Amizade{{ total|pluralize }} Recebida{{ total|pluralize }}</h6>
+                    {% for convite in perfil_logado.convites_recebidos.all %}
+                        <ul>
+                            <li><a class="float-md-left"
+                                   href="{% url 'exibir' convite.solicitante.id %}"> {{ convite.solicitante.nome }}</a>
+                            </li>
+                            <a class=" float-md-right" style="padding-left: 20px" href="{% url 'recusar' convite.id %}"><i
+                                    class="far fa-thumbs-down"></i></a>
+                            <a class=" float-md-right" href="{% url 'aceitar' convite.id %}"><i
+                                    class="far fa-thumbs-up"></i></a>
+
+                        </ul>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="card text-center w-auto">
                     <div class="card-body">
-                        <h6 class="card-title">Responder a{{ total|pluralize }} Solicitação{{ total|pluralize }} de
-                            Amizade{{ total|pluralize }} Recebida{{ total|pluralize }}</h6>
-                        {% for convite in perfil_logado.convites_recebidos.all %}
-                            <ul>
-                                <li><a href="{% url 'exibir' convite.solicitante.id %}"> {{ convite.solicitante.nome }}</a>
-                                <i class="glyphicon glyphicon-thumbs-up" href="{% url 'aceitar' convite.id %}"></i></li>
-                                <li><a href="{% url 'recusar' convite.id %}"
-                                >Recusar</a>
-                                </li>
-
-                            </ul>
-
-
-                        {% endfor %}
+                        <h6 class="card-title">Solicitações de Amizades</h6>
+                        <p class="card-text">Não possui solicitações</p>
                     </div>
-                {% else %}
-                    <div class="card text-center w-auto">
-                        <div class="card-body">
-                            <h6 class="card-title">Solicitações de Amizades</h6>
-                            <p class="card-text">Não possui solicitações</p>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endwith %}
-        </div>
-        <div class="convites-enviados card text-center w-auto">
-            {% with total=perfil_logado.convites_feitos.count %}
-                {% if total %}
-                    <div class="card-body">
-                        <h6 class="card-title">Solicitação{{ total|pluralize }} de Amizade{{ total|pluralize }}
-                            Enviada{{ total|pluralize }}</h6>
-                        {% for convite in perfil_logado.convites_feitos.all %}
-                            <a href="{% url 'exibir' convite.convidado.id %}"> {{ convite.convidado.nome }}</a>
-
-
-                        {% endfor %}
-                    </div>
-
-                {% else %}
-                    <div class="card text-center w-auto">
-                        <div class="card-body">
-                            <h6 class="card-title">Solicitações de Amizades Enviadas</h6>
-                            <p class="card-text">Não possui solicitações</p>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endwith %}
-        </div>
+                </div>
+            {% endif %}
+        {% endwith %}
     </div>
+    <div class="convites-enviados card text-center w-auto">
+        {% with total=perfil_logado.convites_feitos.count %}
+            {% if total %}
+                <div class="card-body">
+                    <h6 class="card-title">Solicitação{{ total|pluralize }} de Amizade{{ total|pluralize }}
+                        Enviada{{ total|pluralize }}</h6>
+                    {% for convite in perfil_logado.convites_feitos.all %}
+                        <li><a href="{% url 'exibir' convite.convidado.id %}"> {{ convite.convidado.nome }}</a>
+
+                    {% endfor %}
+                </div>
+
+            {% else %}
+                <div class="card text-center w-auto">
+                    <div class="card-body">
+                        <h6 class="card-title">Solicitações de Amizades Enviadas</h6>
+                        <p class="card-text">Não possui solicitações</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+</div>
 
 {% endblock %}
