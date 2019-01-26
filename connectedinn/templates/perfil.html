@@ -18,18 +18,52 @@
                     <a href="{% url 'convidar' perfil.id %}">Enviar solicitação de amizade</a>
                 {% endif %}
                 {% if perfil in perfil_logado.contatos_bloqueados.all %}
-                    <a href="{% url 'desbloquear' perfil.id %}">Desbloquear usuário</a>
+                    <a href="#" data-toggle="modal" data-target="#confirm">Desbloquear</a>
+                    <div class="modal fade" id="confirm" role="dialog">
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <p> Deseja realmente desbloquar o usuario?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="{% url 'desbloquear' perfil.id %}" type="button"
+                                       class="btn btn-danger" id="bloqueio">Desbloquear</a>
+                                    <button type="button" data-dismiss="modal" class="btn btn-default">
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 {% else %}
-                    <a href="{% url 'bloquear' perfil.id %}">Bloquear</a>
+                    <a href="#" data-toggle="modal" data-target="#confirm">Bloquear</a>
+                    <div class="modal fade" id="confirm" role="dialog">
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <p> Deseja realmente bloquear o usuario?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="{% url 'bloquear' perfil.id %}" type="button"
+                                       class="btn btn-danger" id="bloqueio">Bloquear</a>
+                                    <button type="button" data-dismiss="modal" class="btn btn-default">
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                {% endif %}
+                {% if perfil_logado.usuario.is_superuser and not perfil.usuario.is_superuser %}
+                    <a href="{% url 'super_user' perfil.id %}">Promover a super usuario</a>
+
                 {% endif %}
             </div>
         </div>
 
 
-
-        <a href="{% url 'super_user' perfil.id %}">
-            Promover a super usuario
-        </a>
     </div>
     <div class=" col-lg-6 timeline">
         {% if perfil_logado.usuario.is_superuser %}
