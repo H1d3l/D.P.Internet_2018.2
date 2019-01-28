@@ -30,8 +30,8 @@ def meu_perfil(request):
         postagens = Postagem.objects.filter(author=perfil_logado).order_by('-published_date')
         contatos = perfil_logado.contatos.all()
         contatos_bloqueados = perfil_logado.contatos_bloqueados.all()
-        return render(request, 'minha_timeline.html', {'postagens':postagens,
-                                                              'contatos':contatos,'contatos_bloqueados':contatos_bloqueados})
+        return render(request, 'minha_timeline.html', {'perfil':perfil_logado,'postagens':postagens,
+                                                            'contatos':contatos,'contatos_bloqueados':contatos_bloqueados})
     else:
         return HttpResponse("nao")
 
@@ -150,9 +150,21 @@ def desativar_perfil(request):
 
 
 
-
+@login_required
 def ativar_perfil(request):
     perfil = get_perfil_logado(request)
     perfil.ativar_perfil()
     perfil.save()
     return redirect("login")
+
+
+
+def uploadfotoperfil(request):
+    if request.method == "POST":
+        form = UploadFotoPerfilForm(request.POST,request.FILES,instance= request.user.perfil)
+        if form.is_valid():
+            form.save()
+            return redirect('meu_perfil')
+    else:
+        form = UploadFotoPerfilForm()
+    return render(request,"uploadfotoperfil.html",{'form':form})

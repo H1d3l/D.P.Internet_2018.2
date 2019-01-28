@@ -5,4 +5,6 @@ from django import forms
 
 
 class PostForm(forms.Form):
-    text = forms.CharField(required=True)
+    text = forms.CharField(required=False)
+    imagem = forms.ImageField(required=False)
+

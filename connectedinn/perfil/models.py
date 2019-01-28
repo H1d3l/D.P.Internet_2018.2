@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 
 class Perfil(models.Model):
+    foto = models.ImageField(upload_to='fotoperfil/',null=True,blank=True)
     nome = models.CharField(max_length=255, null=False)
     telefone = models.CharField(max_length=20, null= False)
     nome_empresa = models.CharField(max_length=255, null=False)

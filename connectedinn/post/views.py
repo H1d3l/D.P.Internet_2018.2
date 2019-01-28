@@ -1,11 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-
+from django.contrib import messages
 from django.shortcuts import render,redirect,HttpResponse
-from post.models import *
 from post.forms import *
-from perfil.models import *
-# Create your views here.
+
 
 def get_perfil_logado(request):
     return request.user.perfil
@@ -19,18 +17,29 @@ def list_post(request):
 
 @login_required
 def create_post(request):
-    form = PostForm(request.POST)
-    if request.method == 'POST':
+
+    if request.method ==  'POST' and request.FILES:
+        form = PostForm(request.POST,request.FILES)
         if form.is_valid():
-            dados_form = form.cleaned_data
-            temp = Postagem()
-            temp.author = request.user.perfil
-            temp.text = dados_form['text']
+            texto = form.cleaned_data['text']
+            imagem = request.FILES['imagem']
+            temp = Postagem(text=texto,imagem=imagem,author=request.user.perfil)
             temp.save()
             return redirect('index')
+    elif request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            texto = form.cleaned_data['text']
+            if not texto :
+                messages.warning(request,"Preencha os campos ")
+            else:
+                temp = Postagem(text=texto,author=request.user.perfil)
+                temp.save()
+            return redirect('index')
+
+
     else:
         return redirect('index')
-
 def excluir_postagem(request,postagem_id):
     postagem = Postagem.objects.get(id = postagem_id)
     postagem.excluir_postagem()

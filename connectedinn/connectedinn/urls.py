@@ -19,6 +19,9 @@ from perfil import views as perfilview
 from usuario.views import *
 from django.contrib.auth import views as auth_views
 from post import views as postview
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +33,7 @@ urlpatterns = [
     path('perfil/minha_timeline',perfilview.meu_perfil,name = 'meu_perfil'),
     path('perfil/minha_timeline/ativar', perfilview.ativar_perfil, name='ativar'),
     path('perfil/minha_timeline/desativar',perfilview.desativar_perfil,name='desativar'),
+    path('perfil/minha_timeline/uploadfotoperfil',perfilview.uploadfotoperfil,name = 'uploadfotoperfil'),
     path('perfil/<int:perfil_id>/convidar',perfilview.convidar, name='convidar'),
     path('convite/<int:convite_id>/aceitar',perfilview.aceitar, name='aceitar'),
     path('convite/<int:convite_id>/recusar', perfilview.recusar, name='recusar'),
@@ -54,6 +58,7 @@ urlpatterns = [
 
 
 
-]
+
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

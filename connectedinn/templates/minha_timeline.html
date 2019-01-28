@@ -2,7 +2,24 @@
 
 {% block body %}
 
-    <div class="col-lg-2">
+    <div class="col-lg-2" xmlns="http://www.w3.org/1999/html">
+        <div class="card">
+            {% if perfil.foto %}
+                <a href="{% url 'uploadfotoperfil' %}"><img src="{{ perfil.foto.url }}" class="card-img-top"
+                                                            alt="fotoperfil"></a>
+            {% else %}
+                <a href="{% url 'uploadfotoperfil' %}"><i class="fas fa-user fa-5x" style="margin-left: 55px;margin-top: 10px"></i></a>
+
+
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ perfil.nome }}</h5>
+                <p class="card-text">
+                    Email: {{ perfil.email }}
+                    Local de trabalho: {{ perfil.nome_empresa }}
+                </p>
+            </div>
+        </div>
         <div class="meus_contatos">
             <div class="card text-center">
                 <div class="card-header">
@@ -39,6 +56,7 @@
         </div>
 
     </div>
+
 
     <div class="col-lg-5">
         <div class="postagens">
