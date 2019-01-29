@@ -57,7 +57,7 @@
             <form action="{% url 'pesquisar_user' %}" class="form-inline my-10 my-lg-0 ml-lg-5" method="post">
                 {% csrf_token %}
               <input required name = 'nome' class="form-control mr-sm-2 " type="search" placeholder="Pesquisar Usuário" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+              <button class="btn btn-primary my-2 my-sm-0" type="submit">Pesquisar</button>
             </form>
 
         </ul>

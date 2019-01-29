@@ -10,6 +10,7 @@ from perfil.forms import *
 from django.urls import reverse
 from post.models import *
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 # Create your views here.
 @login_required
@@ -17,8 +18,11 @@ def index(request):
     if request.user.perfil.ativo == True:
         perfil_logado = get_perfil_logado(request)
         perfis_bloqueados = perfil_logado.contatos_bloqueados.all()
-        postagens = Postagem.objects.filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all()))\
+        postagens_list = Postagem.objects.filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all()))\
             .order_by('-published_date')
+        paginator = Paginator(postagens_list, 10)
+        page = request.GET.get('page')
+        postagens = paginator.get_page(page)
         return render(request, 'index.html', {'perfis': Perfil.objects.all(),
                                               'perfil_logado': get_perfil_logado(request),'postagens':postagens})
     else:
@@ -164,6 +168,7 @@ def uploadfotoperfil(request):
         form = UploadFotoPerfilForm(request.POST,request.FILES,instance= request.user.perfil)
         if form.is_valid():
             form.save()
+            messages.success(request,"Foto atualizada")
             return redirect('meu_perfil')
     else:
         form = UploadFotoPerfilForm()

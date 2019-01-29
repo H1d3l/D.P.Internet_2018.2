@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib import messages
-from django.shortcuts import render,redirect,HttpResponse
+from django.shortcuts import render,redirect
 from post.forms import *
-
+from django.core.paginator import Paginator
 
 def get_perfil_logado(request):
     return request.user.perfil
@@ -11,8 +11,11 @@ def get_perfil_logado(request):
 @login_required
 def list_post(request):
     perfil_logado = get_perfil_logado(request)
-    postagens = Postagem.objects.filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all()))\
+    postagens_list = Postagem.objects.filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all()))\
         .order_by('-published_date')
+    paginator = Paginator(postagens_list,5)
+    page = request.GET.get('page')
+    postagens = paginator.get_page(page)
     return render(request,'index.html',{'postagens':postagens,'perfil_logado':get_perfil_logado(request)})
 
 @login_required
@@ -43,4 +46,5 @@ def create_post(request):
 def excluir_postagem(request,postagem_id):
     postagem = Postagem.objects.get(id = postagem_id)
     postagem.excluir_postagem()
+    messages.success(request,"Postagem excluida com sucesso")
     return redirect('index')
