@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
-from perfil.models import Perfil, Convite
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
@@ -11,22 +10,34 @@ from django.urls import reverse
 from post.models import *
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.db import transaction
+from rest_framework import generics
+from rest_framework import status
+from rest_framework.parsers import JSONParser
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from perfil.serializers import *
 
-# Create your views here.
+
 @login_required
 def index(request):
     if request.user.perfil.ativo == True:
         perfil_logado = get_perfil_logado(request)
-        perfis_bloqueados = perfil_logado.contatos_bloqueados.all()
         postagens_list = Postagem.objects.filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all()))\
             .order_by('-published_date')
         paginator = Paginator(postagens_list, 10)
         page = request.GET.get('page')
         postagens = paginator.get_page(page)
+        comentarios = Comentario.objects.all()
         return render(request, 'index.html', {'perfis': Perfil.objects.all(),
-                                              'perfil_logado': get_perfil_logado(request),'postagens':postagens})
+                                              'perfil_logado': get_perfil_logado(request),'postagens':postagens,
+                                              'comentarios':comentarios})
     else:
         return render(request,'ativar_perfil.html')
+
+
+
+
 @login_required
 def meu_perfil(request):
     perfil_logado = get_perfil_logado(request)
@@ -47,7 +58,10 @@ def exibir_perfil(request, perfil_id):
     return render(request, 'perfil.html',
                   {'perfil': perfil,
                    'perfil_logado': get_perfil_logado(request),'postagens':postagens})
+
+
 @login_required
+@transaction.atomic
 def convidar(request, perfil_id):
     perfil_a_convidar = Perfil.objects.get(id=perfil_id)
     perfil_logado = get_perfil_logado(request)
@@ -60,16 +74,28 @@ def get_perfil_logado(request):
     return  request.user.perfil
 
 @login_required
+@transaction.atomic
 def aceitar(request, convite_id):
     convite = Convite.objects.get(id=convite_id)
     convite.aceitar()
     return redirect('index')
+
 @login_required
+@transaction.atomic
 def recusar(request,convite_id):
     convite = Convite.objects.get(id = convite_id)
     convite.recusar()
     return redirect('index')
+
 @login_required
+def cancelar_solicitacao(request,convite_id):
+    convite = Convite.objects.get(id = convite_id)
+    convite.cancelar_solicitacao()
+    return redirect('index')
+
+
+@login_required
+@transaction.atomic
 def desfazer_amizade(request,perfil_id):
     amigo = Perfil.objects.get(id = perfil_id)
     perfil_logado = get_perfil_logado(request)
@@ -77,6 +103,7 @@ def desfazer_amizade(request,perfil_id):
     return redirect('index')
 
 @login_required
+@transaction.atomic
 def bloquear(request,perfil_id):
     amigo = Perfil.objects.get(id = perfil_id)
     perfil_logado = get_perfil_logado(request)
@@ -84,6 +111,7 @@ def bloquear(request,perfil_id):
     return redirect('meu_perfil')
 
 @login_required
+@transaction.atomic
 def desbloquear(request,perfil_id):
     amigo = Perfil.objects.get(id=perfil_id)
     perfil_logado = get_perfil_logado(request)
@@ -92,6 +120,7 @@ def desbloquear(request,perfil_id):
 
 
 @login_required
+@transaction.atomic
 def alterar_senha(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -125,17 +154,31 @@ def resultado_pesquisa_user(request,filtro):
                                                                 'perfil_logado': get_perfil_logado(request),
                                                                    'contatos':contatos})
 @login_required
-def super_user(request,usuario_id):
+@transaction.atomic
+def promover_super_user(request,usuario_id):
     perfil_logado = get_perfil_logado(request)
     if (perfil_logado.usuario.is_superuser):
         usuario = Perfil.objects.get(id=usuario_id)
-        usuario_is_super = usuario.usuario.is_superuser = True
+        usuario.usuario.is_superuser = True
         usuario.usuario.save()
     else:
         return HttpResponse("Você não é um super usuario")
     return redirect('index')
 
 @login_required
+@transaction.atomic
+def despromover_super_user(request,usuario_id):
+    perfil_logado = get_perfil_logado(request)
+    if (perfil_logado.usuario.is_superuser):
+        usuario = Perfil.objects.get(id=usuario_id)
+        usuario.usuario.is_superuser = False
+        usuario.usuario.save()
+    else:
+        return HttpResponse("Você não é um super usuario")
+    return redirect('index')
+
+@login_required
+@transaction.atomic
 def desativar_perfil(request):
     form = JustificativaDesativarContaForm(request.POST)
     perfil_logado = get_perfil_logado(request)
@@ -155,6 +198,7 @@ def desativar_perfil(request):
 
 
 @login_required
+@transaction.atomic
 def ativar_perfil(request):
     perfil = get_perfil_logado(request)
     perfil.ativar_perfil()
@@ -163,6 +207,8 @@ def ativar_perfil(request):
 
 
 
+@login_required
+@transaction.atomic
 def uploadfotoperfil(request):
     if request.method == "POST":
         form = UploadFotoPerfilForm(request.POST,request.FILES,instance= request.user.perfil)
@@ -173,3 +219,16 @@ def uploadfotoperfil(request):
     else:
         form = UploadFotoPerfilForm()
     return render(request,"uploadfotoperfil.html",{'form':form})
+
+
+
+@api_view(['GET'])
+def pesquisar_perfil(request,nome):
+    try:
+        pesquisa = Perfil.objects.filter(nome=nome)
+    except Perfil.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == "GET":
+        perfil_serializers = PerfilSerializer(pesquisa,many=True)
+        return Response(perfil_serializers.data)

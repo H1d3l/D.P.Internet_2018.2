@@ -21,6 +21,7 @@ from django.contrib.auth import views as auth_views
 from post import views as postview
 from django.conf.urls.static import static
 from django.conf import settings
+from rest_framework.authtoken.views import *
 
 
 urlpatterns = [
@@ -37,6 +38,7 @@ urlpatterns = [
     path('perfil/<int:perfil_id>/convidar',perfilview.convidar, name='convidar'),
     path('convite/<int:convite_id>/aceitar',perfilview.aceitar, name='aceitar'),
     path('convite/<int:convite_id>/recusar', perfilview.recusar, name='recusar'),
+    path('convite/<int:convite_id>/cancelar_solicitacao', perfilview.cancelar_solicitacao, name='cancelar_solicitacao'),
     path('perfil/<int:perfil_id>/desfazer_amizade', perfilview.desfazer_amizade, name='desfazer'),
     path('registrar/', RegistrarUsuarioView.as_view(), name='registrar'),
     path('login/',auth_views.LoginView.as_view(template_name = 'login.html'),name = 'login'),
@@ -51,9 +53,14 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name = 'registration/password_reset_complete.html'),
      name ='password_reset_complete'),
     path('index/',postview.create_post,name = 'criar_post'),
+    path('index/<int:postagem_id>/comentario', postview.comentar_postagem, name='comentar_post'),
     path('pesquisa/',perfilview.pesquisar_user,name='pesquisar_user'),
     path('lista-filtro/<filtro>/', perfilview.resultado_pesquisa_user, name='listaFiltro'),
-    path('usuarios/<int:usuario_id>/',perfilview.super_user,name = 'super_user'),
+    path('usuarios/<int:usuario_id>/promover',perfilview.promover_super_user,name = 'promover_super_user'),
+    path('usuarios/<int:usuario_id>/despromover', perfilview.despromover_super_user, name='despromover_super_user'),
+    path('perfil/<str:nome>',perfilview.pesquisar_perfil,name='pesquisar_perfil_api'),
+    path('token-auth-api/',obtain_auth_token),
+    path('postar-api/',postview.PostarApi.as_view(),name=postview.PostarApi.name)
 
 
 

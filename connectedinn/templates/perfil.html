@@ -57,8 +57,9 @@
                     </div>
                 {% endif %}
                 {% if perfil_logado.usuario.is_superuser and not perfil.usuario.is_superuser %}
-                    <a href="{% url 'super_user' perfil.id %}">Promover a super usuario</a>
-
+                    <a href="{% url 'promover_super_user' perfil.id %}">Promover a super usuario</a>
+                {% elif perfil_logado.usuario.is_superuser and  perfil.usuario.is_superuser  %}
+                    <a href="{% url 'despromover_super_user' perfil.id %}">Despromover super usuario</a>
                 {% endif %}
             </div>
         </div>

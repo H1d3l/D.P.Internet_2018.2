@@ -86,6 +86,9 @@ class Convite(models.Model):
         self.convidado.contatos.add(self.solicitante)
         self.delete()
 
+    def cancelar_solicitacao(self):
+        self.delete()
+
     def recusar(self):
         self.delete()
 

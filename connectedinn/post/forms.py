@@ -8,3 +8,6 @@ class PostForm(forms.Form):
     text = forms.CharField(required=False)
     imagem = forms.ImageField(required=False)
 
+class ComentarioPostForm(forms.Form):
+    comentario = forms.CharField(required=True)
+
