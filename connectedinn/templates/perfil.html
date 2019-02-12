@@ -166,9 +166,7 @@
                 <form class="form-signin" action="{% url 'send_message' perfil.id %}" method="post">
                     {% csrf_token %}
                     <input class="form-control mr-sm-2 mb-2" name="message" type="text" placeholder="Insira uma mensagem..." aria-label="Search">
-
-                    <button type="submit" class="btn btn-info btn-sm mt-2 float-right " data-toggle="modal"
-                            data-target="#confirm">Enviar
+                    <button type="submit" class="btn btn-info btn-sm mt-2 float-right " >Enviar
                     </button>
 
                     {% if form.errors %}

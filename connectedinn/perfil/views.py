@@ -57,22 +57,14 @@ def exibir_perfil(request, perfil_id):
     postagens = Postagem.objects.filter(author=perfil).order_by('-published_date')
 
     mensagens = Conversa.objects.all()
-
-    # print(",sdasda",len(mensagens))
-
     if (request.method == "POST"):
         chat = Conversa(remetente=get_perfil_logado(request),
                         receptor=perfil,
                         mensagem=request.POST.get('message'))
-
         chat.save()
 
-    return render(request, 'perfil.html',
-                  {'perfil': perfil,
-                   # 'perfil_logado': get_perfil_logado(request),'postagens':postagens})
-                   'perfil_logado': get_perfil_logado(request),
-                   'postagens': postagens,
-                   'mensagens': mensagens})
+    return render(request, 'perfil.html',{'perfil': perfil,'perfil_logado': get_perfil_logado(request),
+                                          'postagens': postagens,'mensagens': mensagens})
 
 
 @login_required
@@ -258,18 +250,3 @@ def pesquisar_perfil(request, nome):
         return Response(perfil_serializers.data)
 
 
-@login_required
-
-def send_message(request, perfil_id):
-    perfil = get_perfil_logado(request)
-    receptor = Perfil.objects.get(id=perfil_id)
-
-    form = ChatForm(request.POST)
-    if form.is_valid():
-        dados_form = form.cleaned_data
-        chat = Conversa(remetente=perfil,
-                        receptor=receptor,
-                        mensagem=dados_form['mensagem'])
-        chat.save()
-
-    return redirect(reverse('exibir', kwargs={"perfil.id": receptor.id}))
