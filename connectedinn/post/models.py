@@ -11,8 +11,6 @@ class Postagem(models.Model):
     published_date = models.DateTimeField(blank=True,null=True,default=timezone.now)
     imagem = models.ImageField(upload_to= 'postagemimagem',blank=True,null=True)
 
-
-
     def excluir_postagem(self):
         self.delete()
 

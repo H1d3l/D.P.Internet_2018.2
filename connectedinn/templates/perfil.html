@@ -65,7 +65,7 @@
 
 
     </div>
-    <div class=" col-lg-6 timeline">
+    <div class=" col-lg-4 timeline">
         {% if perfil_logado.usuario.is_superuser %}
             {% for postagem in postagens %}
                 <div class="card">
@@ -157,4 +157,68 @@
             {% endfor %}
         {% endif %}
     </div>
+
+    <div class="col-lg-4">
+        <div class="card w-75 pb-2">
+            <div class="card-body">
+                <h2 class="card-title">Chat</h2>
+                <form class="form-signin" action="{% url 'send_message' perfil.id %}" method="post">
+                    {% csrf_token %}
+                    <input class="form-control mr-sm-2 mb-2" name="message" type="text" placeholder="Insira uma mensagem..." aria-label="Search">
+
+                    <button type="submit" class="btn btn-info btn-sm mt-2 float-right " data-toggle="modal"
+                            data-target="#confirm">Enviar
+                    </button>
+
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <button type="button" class="close"
+                                    data-dismiss="alert" aria-hidden="true">
+                            </button>
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+
+                </form>
+            </div>
+            {% for msg in mensagens %}
+                {% if msg.remetente_id == perfil_logado.id %}
+                    <div class="card mr-3 ml-3 mt-1 mb-2">
+                        <div class="card-header align-item-right bg-dark">
+                            <p class="text-white float-right p-0 m-0">Você</p>
+                            <div class="w-100 float-right">
+                            <i><p style="font-size: 12px;" class="float-right text-white w-5 p-0 m-0">12:08</p></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text float-right">{{ msg.mensagem }}</p>
+                        </div>
+                    </div>
+                {% elif msg.remetente_id == perfil.id %}
+                    <div class="card mr-3 ml-3 mt-1 mb-2">
+                        <div class="card-header" style="background-color: #63424d;">
+                            <p class="text-white p-0 m-0">{{ msg.remetente.nome }}</p>
+                            <i><p style="font-size: 12px;" class="text-white p-0 m-0">12:08</p></i>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{ msg.mensagem }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+
 {% endblock %}		

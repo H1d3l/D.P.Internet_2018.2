@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'perfil',
     'usuario',
     'post',
-    'django.contrib.auth',
-
+    'django.contrib.auth'
 ]
 
 MIDDLEWARE = [
