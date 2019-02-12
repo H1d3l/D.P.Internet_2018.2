@@ -30,6 +30,7 @@ urlpatterns = [
     path('perfil/<int:perfil_id>/bloquear',perfilview.bloquear,name = 'bloquear'),
     path('perfil/<int:perfil_id>/desbloquear',perfilview.desbloquear,name = 'desbloquear'),
     path('perfil/<int:perfil_id>', perfilview.exibir_perfil, name='exibir'),
+    path('perfil/<int:perfil_id>', perfilview.exibir_perfil, name='send_message'),
     path('perfil/minha_timeline',perfilview.meu_perfil,name = 'meu_perfil'),
     path('perfil/minha_timeline/ativar', perfilview.ativar_perfil, name='ativar'),
     path('perfil/minha_timeline/desativar',perfilview.desativar_perfil,name='desativar'),

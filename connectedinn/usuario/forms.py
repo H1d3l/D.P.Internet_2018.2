@@ -10,7 +10,6 @@ class RegistrarUsuarioForm(forms.Form):
     telefone = forms.CharField(required=True)
     nome_empresa = forms.CharField(required=True)
 
-
     def is_valid(self):
         valid = True
         if not super(RegistrarUsuarioForm, self).is_valid():

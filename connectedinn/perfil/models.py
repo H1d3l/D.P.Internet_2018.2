@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -99,3 +101,16 @@ class Bloqueio(models.Model):
 class Justificativa(models.Model):
     perfil = models.ForeignKey(Perfil,on_delete=models.CASCADE)
     justificativa = models.TextField()
+
+
+
+class Conversa(models.Model):
+    remetente = models.ForeignKey(Perfil, on_delete=models.CASCADE, related_name="mensagens_enviadas")
+    receptor = models.ForeignKey(Perfil, on_delete=models.CASCADE, related_name="mensagens_recebidas")
+    mensagem = models.CharField(max_length=500, null=False, blank=False)
+    hora_envio = models.DateTimeField(blank=True,null=True,default=timezone.now)
+    imagem = models.ImageField(upload_to= 'mensagemimagem',blank=True,null=True)
+    like = models.BooleanField(default=False)
+
+    def curtir(self):
+        self.like = not self.like
