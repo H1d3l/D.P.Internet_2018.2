@@ -23,19 +23,18 @@ from perfil.serializers import *
 def index(request):
     if request.user.perfil.ativo == True:
         perfil_logado = get_perfil_logado(request)
-        postagens_list = Postagem.objects.filter(Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all()))\
+        postagens_list = Postagem.objects.filter(
+            Q(author=perfil_logado) | Q(author_id__in=perfil_logado.contatos.all())) \
             .order_by('-published_date')
         paginator = Paginator(postagens_list, 10)
         page = request.GET.get('page')
         postagens = paginator.get_page(page)
         comentarios = Comentario.objects.all()
         return render(request, 'index.html', {'perfis': Perfil.objects.all(),
-                                              'perfil_logado': get_perfil_logado(request),'postagens':postagens,
-                                              'comentarios':comentarios})
+                                              'perfil_logado': get_perfil_logado(request), 'postagens': postagens,
+                                              'comentarios': comentarios})
     else:
-        return render(request,'ativar_perfil.html')
-
-
+        return render(request, 'ativar_perfil.html')
 
 
 @login_required
@@ -45,8 +44,9 @@ def meu_perfil(request):
         postagens = Postagem.objects.filter(author=perfil_logado).order_by('-published_date')
         contatos = perfil_logado.contatos.all()
         contatos_bloqueados = perfil_logado.contatos_bloqueados.all()
-        return render(request, 'minha_timeline.html', {'perfil':perfil_logado,'postagens':postagens,
-                                                            'contatos':contatos,'contatos_bloqueados':contatos_bloqueados})
+        return render(request, 'minha_timeline.html', {'perfil': perfil_logado, 'postagens': postagens,
+                                                       'contatos': contatos,
+                                                       'contatos_bloqueados': contatos_bloqueados})
     else:
         return HttpResponse("nao")
 
@@ -55,9 +55,24 @@ def meu_perfil(request):
 def exibir_perfil(request, perfil_id):
     perfil = Perfil.objects.get(id=perfil_id)
     postagens = Postagem.objects.filter(author=perfil).order_by('-published_date')
+
+    mensagens = Conversa.objects.all()
+
+    # print(",sdasda",len(mensagens))
+
+    if (request.method == "POST"):
+        chat = Conversa(remetente=get_perfil_logado(request),
+                        receptor=perfil,
+                        mensagem=request.POST.get('message'))
+
+        chat.save()
+
     return render(request, 'perfil.html',
                   {'perfil': perfil,
-                   'perfil_logado': get_perfil_logado(request),'postagens':postagens})
+                   # 'perfil_logado': get_perfil_logado(request),'postagens':postagens})
+                   'perfil_logado': get_perfil_logado(request),
+                   'postagens': postagens,
+                   'mensagens': mensagens})
 
 
 @login_required
@@ -65,13 +80,15 @@ def exibir_perfil(request, perfil_id):
 def convidar(request, perfil_id):
     perfil_a_convidar = Perfil.objects.get(id=perfil_id)
     perfil_logado = get_perfil_logado(request)
-    if(perfil_logado.pode_convidar(perfil_a_convidar)):
+    if (perfil_logado.pode_convidar(perfil_a_convidar)):
         perfil_logado.convidar(perfil_a_convidar)
     return redirect('index')
 
+
 @login_required
 def get_perfil_logado(request):
-    return  request.user.perfil
+    return request.user.perfil
+
 
 @login_required
 @transaction.atomic
@@ -80,39 +97,43 @@ def aceitar(request, convite_id):
     convite.aceitar()
     return redirect('index')
 
+
 @login_required
 @transaction.atomic
-def recusar(request,convite_id):
-    convite = Convite.objects.get(id = convite_id)
+def recusar(request, convite_id):
+    convite = Convite.objects.get(id=convite_id)
     convite.recusar()
     return redirect('index')
 
+
 @login_required
-def cancelar_solicitacao(request,convite_id):
-    convite = Convite.objects.get(id = convite_id)
+def cancelar_solicitacao(request, convite_id):
+    convite = Convite.objects.get(id=convite_id)
     convite.cancelar_solicitacao()
     return redirect('index')
 
 
 @login_required
 @transaction.atomic
-def desfazer_amizade(request,perfil_id):
-    amigo = Perfil.objects.get(id = perfil_id)
+def desfazer_amizade(request, perfil_id):
+    amigo = Perfil.objects.get(id=perfil_id)
     perfil_logado = get_perfil_logado(request)
     perfil_logado.desfazer_amizade(amigo)
     return redirect('index')
 
+
 @login_required
 @transaction.atomic
-def bloquear(request,perfil_id):
-    amigo = Perfil.objects.get(id = perfil_id)
+def bloquear(request, perfil_id):
+    amigo = Perfil.objects.get(id=perfil_id)
     perfil_logado = get_perfil_logado(request)
     perfil_logado.bloquear_contato(amigo)
     return redirect('meu_perfil')
 
+
 @login_required
 @transaction.atomic
-def desbloquear(request,perfil_id):
+def desbloquear(request, perfil_id):
     amigo = Perfil.objects.get(id=perfil_id)
     perfil_logado = get_perfil_logado(request)
     perfil_logado.desbloquear_contato(amigo)
@@ -135,6 +156,7 @@ def alterar_senha(request):
         form = PasswordChangeForm(request.user)
     return render(request, 'alterar_senha.html', {'form': form})
 
+
 @login_required
 def pesquisar_user(request):
     form = PesquisaUsuariosForm(request.POST or None)
@@ -145,17 +167,20 @@ def pesquisar_user(request):
     else:
         redirect('index')
 
+
 @login_required
-def resultado_pesquisa_user(request,filtro):
+def resultado_pesquisa_user(request, filtro):
     perfil_logado = get_perfil_logado(request)
     filtro = Perfil.objects.filter(nome=filtro)
     contatos = perfil_logado.contatos.all()
-    return render(request, 'resultado_pesquisa_user.html', {'usuarios':filtro,
-                                                                'perfil_logado': get_perfil_logado(request),
-                                                                   'contatos':contatos})
+    return render(request, 'resultado_pesquisa_user.html', {'usuarios': filtro,
+                                                            'perfil_logado': get_perfil_logado(request),
+                                                            'contatos': contatos})
+
+
 @login_required
 @transaction.atomic
-def promover_super_user(request,usuario_id):
+def promover_super_user(request, usuario_id):
     perfil_logado = get_perfil_logado(request)
     if (perfil_logado.usuario.is_superuser):
         usuario = Perfil.objects.get(id=usuario_id)
@@ -165,9 +190,10 @@ def promover_super_user(request,usuario_id):
         return HttpResponse("Você não é um super usuario")
     return redirect('index')
 
+
 @login_required
 @transaction.atomic
-def despromover_super_user(request,usuario_id):
+def despromover_super_user(request, usuario_id):
     perfil_logado = get_perfil_logado(request)
     if (perfil_logado.usuario.is_superuser):
         usuario = Perfil.objects.get(id=usuario_id)
@@ -176,6 +202,7 @@ def despromover_super_user(request,usuario_id):
     else:
         return HttpResponse("Você não é um super usuario")
     return redirect('index')
+
 
 @login_required
 @transaction.atomic
@@ -193,8 +220,7 @@ def desativar_perfil(request):
             return redirect('login')
     else:
         form = JustificativaDesativarContaForm()
-    return render(request, 'desabilitarconta.html',{'form':form})
-
+    return render(request, 'desabilitarconta.html', {'form': form})
 
 
 @login_required
@@ -206,29 +232,44 @@ def ativar_perfil(request):
     return redirect("login")
 
 
-
 @login_required
 @transaction.atomic
 def uploadfotoperfil(request):
     if request.method == "POST":
-        form = UploadFotoPerfilForm(request.POST,request.FILES,instance= request.user.perfil)
+        form = UploadFotoPerfilForm(request.POST, request.FILES, instance=request.user.perfil)
         if form.is_valid():
             form.save()
-            messages.success(request,"Foto atualizada")
+            messages.success(request, "Foto atualizada")
             return redirect('meu_perfil')
     else:
         form = UploadFotoPerfilForm()
-    return render(request,"uploadfotoperfil.html",{'form':form})
-
+    return render(request, "uploadfotoperfil.html", {'form': form})
 
 
 @api_view(['GET'])
-def pesquisar_perfil(request,nome):
+def pesquisar_perfil(request, nome):
     try:
         pesquisa = Perfil.objects.filter(nome=nome)
     except Perfil.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == "GET":
-        perfil_serializers = PerfilSerializer(pesquisa,many=True)
+        perfil_serializers = PerfilSerializer(pesquisa, many=True)
         return Response(perfil_serializers.data)
+
+
+@login_required
+
+def send_message(request, perfil_id):
+    perfil = get_perfil_logado(request)
+    receptor = Perfil.objects.get(id=perfil_id)
+
+    form = ChatForm(request.POST)
+    if form.is_valid():
+        dados_form = form.cleaned_data
+        chat = Conversa(remetente=perfil,
+                        receptor=receptor,
+                        mensagem=dados_form['mensagem'])
+        chat.save()
+
+    return redirect(reverse('exibir', kwargs={"perfil.id": receptor.id}))
